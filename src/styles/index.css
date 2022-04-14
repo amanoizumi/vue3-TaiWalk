@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'base';
+@import 'components';
+
+@import '@vuepic/vue-datepicker/dist/main.css';
+@import 'vue3-openlayers/dist/vue3-openlayers.css';
+
+@import 'animate.css';
