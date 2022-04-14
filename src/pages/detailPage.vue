@@ -191,7 +191,7 @@ export default {
               const obj = {
                 id: item.ScenicSpotID,
                 title: item.ScenicSpotName,
-                imageUrl: item.Picture?.PictureUrl1,
+                imageUrl: item.Picture?.PictureUrl1 || noImg,
                 address: item.Address
               }
               arr.push(obj);
@@ -205,7 +205,7 @@ export default {
               const obj = {
                 id: item.ActivityID,
                 title: item.ActivityName,
-                imageUrl: item.Picture?.PictureUrl1,
+                imageUrl: item.Picture?.PictureUrl1 || noImg,
                 address: item.Address
               }
               arr.push(obj);
@@ -218,7 +218,7 @@ export default {
               const obj = {
                 id: item.RestaurantID,
                 title: item.RestaurantName,
-                imageUrl: item.Picture?.PictureUrl1,
+                imageUrl: item.Picture?.PictureUrl1 || noImg,
                 address: item.Address
               }
               arr.push(obj);
@@ -235,7 +235,7 @@ export default {
 
         const obj = {
           Name: detailData.value[categoryStr.value + 'Name'],
-          Picture: detailData.value.Picture?.PictureUrl1,
+          Picture: detailData.value.Picture?.PictureUrl1 || noImg,
           Description: detailData.value.Description || '尚無描述',
           Phone: detailData.value.Phone || '尚無電話資訊',
           WebsiteUrl: detailData.value.WebsiteUrl || '尚無提供網站',

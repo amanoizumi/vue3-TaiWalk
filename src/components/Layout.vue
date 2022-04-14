@@ -87,7 +87,6 @@ export default {
       } else if (menuState.value === '') {
         menuState.value = 'hidden';
       }
-      console.log(menuState.value);
     };
 
     return {
