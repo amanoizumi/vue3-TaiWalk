@@ -1,4 +1,4 @@
-# THE F2E 台灣旅遊景點-vue3-TaiWalk
+# THE F2E 台灣旅遊景點導覽-vue3-TaiWalk
 
 **[DEMO](https://amanoizumi.github.io/vue3-TaiWalk/#/)**
 
