@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ 'animate__animated animate__fadeOut': fadeOut, hidden: hidden }"
-    class="absolute z-10 w-full h-max bg-white"
+    class="absolute z-20 w-full h-max bg-white"
   >
     <div class="flex justify-center h-screen items-center">
       <svg

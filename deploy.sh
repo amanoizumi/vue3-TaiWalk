@@ -8,6 +8,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f https://github.com/amanoizumi/vue3-TaiWalk.git main:gh-pages
+git push https://github.com/amanoizumi/vue3-TaiWalk.git master:gh-pages
 
 cd -
