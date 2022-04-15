@@ -6,11 +6,16 @@
         :class="{ 'border border-[#e5e5e5]': imageUrl === noImg }"
       >
         <div class="relative h-[200px] bg-cover bg-center duration-300 ease-out hover:scale-110">
-        
-          <img class="h-full w-full object-cover" v-real-img="imageUrl" :src="imageUrl" :alt="imageUrl" :title="title" />
+          <img
+            class="h-full w-full object-cover"
+            v-real-img="imageUrl"
+            :src="imageUrl"
+            :alt="imageUrl"
+            :title="title"
+          />
         </div>
       </div>
-      <h4 class="mb-[10px] text-md md:text-xl font-bold text-[#2f2f2f]">{{ title }}</h4>
+      <h4 class="mb-[10px] text-md font-bold text-[#2f2f2f] md:text-xl">{{ title }}</h4>
       <div class="flex text-gray">
         <heroIconsOutlineLocation class="mt-1" />
         {{ address || '暫無地址資料' }}
@@ -22,7 +27,7 @@
 //
 <script>
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
-import noImg from '@/assets/img/no_image.png'
+import noImg from '@/assets/img/no_image.png';
 
 export default {
   components: {
@@ -37,15 +42,15 @@ export default {
     address: String,
     id: String,
   },
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const emitData = () => {
       // 重新觸發
       emit('emit-update-detail-page', props.id);
-    }
+    };
     return {
       emitData,
-      noImg
-    }
-  }
+      noImg,
+    };
+  },
 };
 </script>
