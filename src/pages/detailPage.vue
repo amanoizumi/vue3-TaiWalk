@@ -35,7 +35,7 @@
         </article>
       </section>
 
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] mb-[100px]">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] mb-[100px] break-words">
         <div class="bg-[#f9f9f9] md:mb-0 mb-4 p-[30px] text-[#2f2f2f] rounded-xl ">
           <div v-if="categoryStr === 'Activity'">
             <p class="mb-[14px]">
