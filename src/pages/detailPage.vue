@@ -1,21 +1,34 @@
 <template>
   <Layout>
-    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px]  px-[15px]">
+    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
-      <Breadcrumb class="mb-[30px]" v-if="breadcrumbItem.length > 0" :breadcrumb-li="breadcrumbItem"
-        :last-item="breadcrumbLastStr" />
+      <Breadcrumb
+        class="mb-[30px]"
+        v-if="breadcrumbItem.length > 0"
+        :breadcrumb-li="breadcrumbItem"
+        :last-item="breadcrumbLastStr"
+      />
       <section class="mb-[30px]">
-        <div class="h-[185px] md:h-[400px] overflow-hidden rounded-3xl">
-          <img class="h-full w-full object-cover" v-real-img="showDetailData.Picture" :src="showDetailData.Picture" :alt="showDetailData.Picture" :title="showDetailData.Name" />
+        <div class="h-[185px] overflow-hidden rounded-3xl md:h-[400px]">
+          <img
+            class="h-full w-full object-cover"
+            v-real-img="showDetailData.Picture"
+            :src="showDetailData.Picture"
+            :alt="showDetailData.Picture"
+            :title="showDetailData.Name"
+          />
         </div>
       </section>
 
       <section class="mb-[60px]">
         <h2 class="mb-4 text-4xl font-thin text-[#1E1E1E]">{{ showDetailData.Name }}</h2>
         <ul v-if="showDetailData.Class?.length !== 0" class="mb-8 flex">
-          <li v-for="item in showDetailData.Class" :key="item"
-            class="mr-2 rounded-full border py-1 pl-2 pr-[10px] text-[#BEA363]">
-              {{ item }}
+          <li
+            v-for="item in showDetailData.Class"
+            :key="item"
+            class="mr-2 rounded-full border py-1 pl-2 pr-[10px] text-[#BEA363]"
+          >
+            {{ item }}
           </li>
         </ul>
 
@@ -24,10 +37,10 @@
             categoryStr === 'Activity'
               ? '活動介紹：'
               : categoryStr === 'Restaurant'
-                ? '餐廳介紹'
-                : categoryStr === 'ScenicSpot'
-                  ? '景點介紹'
-                  : '介紹'
+              ? '餐廳介紹'
+              : categoryStr === 'ScenicSpot'
+              ? '景點介紹'
+              : '介紹'
           }}
         </h3>
         <article class="text-lg font-thin">
@@ -35,18 +48,23 @@
         </article>
       </section>
 
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] mb-[100px] break-words">
-        <div class="bg-[#f9f9f9] md:mb-0 mb-4 p-[30px] text-[#2f2f2f] rounded-xl ">
+      <section class="mb-[100px] grid grid-cols-1 gap-x-[30px] break-words md:grid-cols-2">
+        <div class="mb-4 rounded-xl bg-[#f9f9f9] p-[30px] text-[#2f2f2f] md:mb-0">
           <div v-if="categoryStr === 'Activity'">
             <p class="mb-[14px]">
-              <span class="font-bold">活動時間：</span>{{ `${showDetailData.StartTime} - ${showDetailData.EndTime}` }}
+              <span class="font-bold">活動時間：</span
+              >{{ `${showDetailData.StartTime} - ${showDetailData.EndTime}` }}
             </p>
             <p class="mb-[14px]"><span class="font-bold">聯絡電話：</span>{{ showDetailData.Phone }}</p>
             <p class="mb-[14px]"><span class="font-bold">主辦單位：</span>{{ showDetailData.Organizer }}</p>
             <p class="mb-[14px]"><span class="font-bold">活動地點：</span>{{ showDetailData.Address }}</p>
             <p class="mb-[14px]">
-              <span class="font-bold">官方網站：</span><a class="hover:text-orange-600"
-                v-if="showDetailData.WebsiteUrl !== '尚無提供網站'" :href="showDetailData.WebsiteUrl">
+              <span class="font-bold">官方網站：</span
+              ><a
+                class="hover:text-orange-600"
+                v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
+                :href="showDetailData.WebsiteUrl"
+              >
                 {{ showDetailData.WebsiteUrl }}
               </a>
               <span v-else>尚無提供網站</span>
@@ -63,8 +81,12 @@
             <p class="mb-[14px]"><span class="font-bold">餐廳地址：</span>{{ showDetailData.Address }}</p>
             <p class="mb-[14px]">
               <span class="font-bold">官方網站：</span>
-              <a class="hover:text-orange-600" v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
-                :href="showDetailData.WebsiteUrl">{{ showDetailData.WebsiteUrl }}</a>
+              <a
+                class="hover:text-orange-600"
+                v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
+                :href="showDetailData.WebsiteUrl"
+                >{{ showDetailData.WebsiteUrl }}</a
+              >
               <span v-else>尚無提供網站</span>
             </p>
           </div>
@@ -76,21 +98,34 @@
             <p class="mb-[14px]"><span class="font-bold">景點地址：</span>{{ showDetailData.Address }}</p>
             <p class="mb-[14px]">
               <span class="font-bold">官方網站：</span>
-              <a class="hover:text-orange-600" v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
-                :href="showDetailData.WebsiteUrl">{{ showDetailData.WebsiteUrl }}</a>
+              <a
+                class="hover:text-orange-600"
+                v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
+                :href="showDetailData.WebsiteUrl"
+                >{{ showDetailData.WebsiteUrl }}</a
+              >
               <span v-else>尚無提供網站</span>
             </p>
             <p class="mb-[14px]"><span class="font-bold">票價資訊：</span>{{ showDetailData.TicketInfo }}</p>
             <p class="mb-[14px]"><span class="font-bold">注意事項：</span>{{ showDetailData.Remarks }}</p>
           </div>
         </div>
-        
+
         <div>
-          <div class="rounded-xl overflow-hidden">
-            <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true"
-              style="height: 250px; width: 540px;">
-              <ol-view ref="view" :center="center" :rotation="rotation" :zoom="zoom" :projection="projection"
-                :coordinate="coordinate" />
+          <div class="overflow-hidden rounded-xl">
+            <ol-map
+              :loadTilesWhileAnimating="true"
+              :loadTilesWhileInteracting="true"
+              style="height: 250px; width: 540px"
+            >
+              <ol-view
+                ref="view"
+                :center="center"
+                :rotation="rotation"
+                :zoom="zoom"
+                :projection="projection"
+                :coordinate="coordinate"
+              />
               <ol-zoom-control />
 
               <ol-tile-layer>
@@ -115,13 +150,29 @@
       </section>
 
       <section v-if="popCardData?.length !== 0">
-        <h2 v-if="categoryStr === 'ScenicSpot'" class="mb-4 text-2xl md:text-4xl font-thin text-[#1E1E1E]">還有這些不能錯過的景點</h2>
-        <h2 v-else-if="categoryStr === 'Activity'" class="mb-4 text-2xl md:text-4xl font-thin text-[#1E1E1E]">還有這些不能錯過活動</h2>
-        <h2 v-else-if="categoryStr === 'Restaurant'" class="mb-4 text-2xl md:text-4xl font-thin text-[#1E1E1E]">還有這些不能錯過的美食</h2>
+        <h2 v-if="categoryStr === 'ScenicSpot'" class="mb-4 text-2xl font-thin text-[#1E1E1E] md:text-4xl">
+          還有這些不能錯過的景點
+        </h2>
+        <h2 v-else-if="categoryStr === 'Activity'" class="mb-4 text-2xl font-thin text-[#1E1E1E] md:text-4xl">
+          還有這些不能錯過活動
+        </h2>
+        <h2
+          v-else-if="categoryStr === 'Restaurant'"
+          class="mb-4 text-2xl font-thin text-[#1E1E1E] md:text-4xl"
+        >
+          還有這些不能錯過的美食
+        </h2>
 
-        <ul class="grid  grid-cols-2 md:grid-cols-4 gap-x-[30px]">
-          <PopCard v-for="item in popCardData" :key="item.id" :id="item.id" :title="item.title"
-            :imageUrl="item.imageUrl" :address="item.address" @emit-update-detail-page="callDetailByIDApi" />
+        <ul class="grid grid-cols-2 gap-x-[30px] md:grid-cols-4">
+          <PopCard
+            v-for="item in popCardData"
+            :key="item.id"
+            :id="item.id"
+            :title="item.title"
+            :imageUrl="item.imageUrl"
+            :address="item.address"
+            @emit-update-detail-page="callDetailByIDApi"
+          />
         </ul>
       </section>
     </main>
@@ -134,8 +185,8 @@ import { useRoute } from 'vue-router';
 import { getDetailByIDApi } from '@/api/axios';
 import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/axios';
 import cityData from '@/services/cityData';
-import noImg from '@/assets/img/no_image.png'
-import icon from '@/assets/icon/pin.svg'
+import noImg from '@/assets/img/no_image.png';
+import icon from '@/assets/icon/pin.svg';
 
 export default {
   setup() {
@@ -170,7 +221,7 @@ export default {
           path: '/',
           text: '首頁',
         },
-      ]
+      ];
       try {
         const res = await getDetailByIDApi(id, categoryStr.value);
 
@@ -192,11 +243,10 @@ export default {
                 id: item.ScenicSpotID,
                 title: item.ScenicSpotName,
                 imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address
-              }
+                address: item.Address,
+              };
               arr.push(obj);
-            })
-
+            });
           } else if (categoryStr.value === 'Activity') {
             const result = await getActivityByCountyApi(city, 4);
             const data = result.data;
@@ -206,10 +256,10 @@ export default {
                 id: item.ActivityID,
                 title: item.ActivityName,
                 imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address
-              }
+                address: item.Address,
+              };
               arr.push(obj);
-            })
+            });
           } else if (categoryStr.value === 'Restaurant') {
             const result = await getRestaurantByCountyApi(city, 4);
             const data = result.data;
@@ -219,17 +269,20 @@ export default {
                 id: item.RestaurantID,
                 title: item.RestaurantName,
                 imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address
-              }
+                address: item.Address,
+              };
               arr.push(obj);
-            })
+            });
           }
         }
 
         popCardData.value = arr;
 
         breadcrumbLastStr.value = detailData.value[categoryStr.value + 'Name'];
-        location = [Number(detailData.value.Position.PositionLon.toFixed(7)), Number(detailData.value.Position.PositionLat.toFixed(6))];
+        location = [
+          Number(detailData.value.Position.PositionLon.toFixed(7)),
+          Number(detailData.value.Position.PositionLat.toFixed(6)),
+        ];
         coordinate.value = location;
         center.value = location;
 
@@ -333,7 +386,7 @@ export default {
       coordinate,
       popCardData,
       noImg,
-      icon
+      icon,
     };
   },
 };

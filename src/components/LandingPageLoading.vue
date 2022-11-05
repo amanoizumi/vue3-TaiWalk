@@ -1,9 +1,9 @@
 <template>
   <div
     :class="{ 'animate__animated animate__fadeOut': fadeOut, hidden: hidden }"
-    class="absolute z-20 w-full h-max bg-white"
+    class="absolute z-20 h-max w-full bg-white"
   >
-    <div class="flex justify-center h-screen items-center">
+    <div class="flex h-screen items-center justify-center">
       <svg
         :class="landingPageAnime"
         width="300"

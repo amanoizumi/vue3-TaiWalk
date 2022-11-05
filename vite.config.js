@@ -1,21 +1,21 @@
 import path from 'path';
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Components from 'unplugin-vue-components/vite'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Components from 'unplugin-vue-components/vite';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 
 export default defineConfig({
   build: {
-    chunkSizeWarningLimit:3000,
-	},
-  resolve : {
+    chunkSizeWarningLimit: 3000,
+  },
+  resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     },
   },
-  base:'/vue3-TaiWalk/',
-  
+  base: '/vue3-TaiWalk/',
+
   plugins: [
     Vue(),
     Components({
@@ -27,4 +27,4 @@ export default defineConfig({
     }),
     Icons(),
   ],
-})
+});

@@ -6,13 +6,7 @@
         :class="{ 'border border-[#e5e5e5]': imageUrl === noImg }"
       >
         <div class="relative h-[200px] bg-cover bg-center duration-300 ease-out hover:scale-110">
-          <img
-            class="h-full w-full object-cover"
-            v-real-img="imageUrl"
-            :src="imageUrl"
-            :alt="imageUrl"
-            :title="title"
-          />
+          <img class="h-full w-full object-cover" v-real-img="imageUrl" :src="imageUrl" :alt="title" />
         </div>
       </div>
       <h4 class="mb-[10px] text-md font-bold text-[#2f2f2f] md:text-xl">{{ title }}</h4>

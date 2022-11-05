@@ -4,13 +4,12 @@ import App from './App.vue';
 import OpenLayersMap from 'vue3-openlayers';
 import './styles/index.css';
 
-import noImg from '@/assets/img/no_image.png'
+import noImg from '@/assets/img/no_image.png';
 
 const app = createApp(App);
 
 app.use(router);
 app.use(OpenLayersMap);
-
 
 // 加入全域自訂指令，替代尚未載入的遠端圖片
 app.directive('real-img', async (el, binding) => {
@@ -31,10 +30,10 @@ app.directive('real-img', async (el, binding) => {
 });
 
 //檢測圖片是否存在
-const imageIsExist = (url) =>  {
+const imageIsExist = (url) => {
   return new Promise((resolve) => {
     let img = new Image();
-    img.onload = function() {
+    img.onload = function () {
       if (this.complete === true) {
         resolve(true);
         img = null;

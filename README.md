@@ -2,7 +2,6 @@
 
 **[DEMO](https://amanoizumi.github.io/vue3-TaiWalk/#/)**
 
-
 ## 安裝專案
 
 ```
@@ -24,15 +23,14 @@ npm run build
 - Vue 3 Datepicker
 - Axios
 
-
-
 ## 第三方服務
+
 - TDX api v2
 - Vue3 OpenLayers Map 串接地圖介面
 
-
 ## 資料夾說明
-- assets #  靜態資源放置處
+
+- assets # 靜態資源放置處
 - api # api 請求函式放置處
 - components # 元件放置處
 - pages # 頁面元件放置處

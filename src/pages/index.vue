@@ -2,7 +2,7 @@
   <LandingPageLoading @show-index="showIndexFn" />
   <Layout>
     <div :class="{ invisible: !showIndex }" class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
-      <header class="mt-14 md:mt-[82px] flex flex-col md:px-[95px] pb-[60px] lg:grid lg:grid-cols-3">
+      <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
         <div class="col-span-2">
           <h2
             class="mb-4 text-center text-3xl font-light tracking-widest text-[#1e1e1e] lg:text-left lg:text-5xl"
@@ -16,10 +16,10 @@
           </h2>
 
           <div class="mb-10 flex items-center justify-center lg:mb-0 lg:justify-start">
-            <p class="flex items-center text-sm md:text-xl text-[#646464]">
+            <p class="flex items-center text-sm text-[#646464] md:text-xl">
               <heroIconsLocation class="text-[#e0da48]" />台灣旅遊景點導覽
             </p>
-            <p class="ml-2 font-serif text-xs md:text-lg font-bold text-[#646464]">Taiwan Travel Guide</p>
+            <p class="ml-2 font-serif text-xs font-bold text-[#646464] md:text-lg">Taiwan Travel Guide</p>
           </div>
         </div>
 
@@ -257,7 +257,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .swiper-button-next,
 .swiper-button-prev {
   color: white;
