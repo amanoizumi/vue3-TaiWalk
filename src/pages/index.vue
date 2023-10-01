@@ -183,6 +183,7 @@ export default {
     emit('show-index', showIndexFn);
 
     const callScenicSpot = async () => {
+      // TODO: 這裡打太多 api
       const arr = ['Taipei', 'Tainan', 'Kaohsiung', 'HualienCounty'];
       try {
         let promiseArr = arr.map(async (item) => {
@@ -202,6 +203,7 @@ export default {
       const arr = ['Taipei', 'PenghuCounty', 'Kaohsiung', 'HualienCounty', 'YunlinCounty'];
       const data = [];
       try {
+        // TODO: 這裡打太多 api
         let promiseArr = arr.map(async (item) => {
           const res = await getScenicSpotByCountyApi(item, 1);
           return res.data;
