@@ -23,6 +23,7 @@ const getAuthorizationHeader = async () => {
   return token;
 };
 /* === 觀光景點 API ===*/
+// 取得所有觀光景點資料
 export const getScenicSpotApi = () => {
   const apiUrl = `${url}/ScenicSpot?$filter=Picture/PictureUrl1 ne null`;
   return axios.get(apiUrl, {

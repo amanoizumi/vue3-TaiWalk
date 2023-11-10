@@ -102,7 +102,7 @@
         </div>
         <ul class="md:grid md:grid-cols-4 md:gap-x-[30px]">
           <PopCard
-            v-for="item in hotSpotData"
+            v-for="item in swiperData"
             :key="item.ScenicSpotID"
             :id="item.ScenicSpotID"
             :title="item.ScenicSpotName"
@@ -143,7 +143,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 
-import { getScenicSpotByCountyApi, getActivityApi, getRestaurantApi } from '@/api/axios';
+import { getScenicSpotApi, getActivityApi, getRestaurantApi } from '@/api/axios';
 import { afterDayActivity, getTodayDateStr } from '@/services/activity';
 
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
@@ -171,6 +171,10 @@ export default {
   },
   setup(props, { emit }) {
     const swiperData = ref([]);
+
+    // 景點純資料
+    let totalSpotData = [];
+
     const hotSpotData = ref([]);
     const activityData = ref([]);
     const restaurantData = ref([]);
@@ -183,42 +187,33 @@ export default {
     emit('show-index', showIndexFn);
 
     const callScenicSpot = async () => {
-      // TODO: 這裡打太多 api
-      const arr = ['Taipei', 'Tainan', 'Kaohsiung', 'HualienCounty'];
       try {
-        let promiseArr = arr.map(async (item) => {
-          const res = await getScenicSpotByCountyApi(item, 1);
-          return res.data[0];
-        });
-
-        for (const res of promiseArr) {
-          hotSpotData.value.push(await res);
-        }
+        const spotData = await getScenicSpotApi();
+        totalSpotData = spotData.data;
       } catch (err) {
-        console.dir(err);
+        console.dir('無法取得資料', err);
       }
     };
 
-    const callScenicSpotForSwiper = async () => {
-      const arr = ['Taipei', 'PenghuCounty', 'Kaohsiung', 'HualienCounty', 'YunlinCounty'];
-      const data = [];
-      try {
-        // TODO: 這裡打太多 api
-        let promiseArr = arr.map(async (item) => {
-          const res = await getScenicSpotByCountyApi(item, 1);
-          return res.data;
-        });
+    const scenicForSwiper = () => {
+      const hasCityData = totalSpotData.filter((item) => {
+        return item.hasOwnProperty('City');
+      });
 
-        for (const res of promiseArr) {
-          data.push(await res);
+      // 取出目標縣市的第一筆資料來顯示到 Swiper
+      let obj = {
+        新北市: 0,
+        高雄市: 0,
+        花蓮縣: 0,
+        雲林縣: 0,
+      };
+
+      hasCityData.forEach((item) => {
+        if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
+          obj[item.City] += 1;
+          swiperData.value.push(item);
         }
-        data.forEach((spotArr) => {
-          const idx = spotArr.findIndex((el) => el.Picture.hasOwnProperty('PictureUrl1'));
-          swiperData.value.push(spotArr[idx]);
-        });
-      } catch (err) {
-        console.dir(err);
-      }
+      });
     };
 
     const callActivity = async () => {
@@ -239,9 +234,11 @@ export default {
       }
     };
 
-    onMounted(() => {
-      callScenicSpotForSwiper();
-      callScenicSpot();
+    onMounted(async () => {
+      await callScenicSpot();
+
+      scenicForSwiper();
+
       callActivity();
       callRestaurant();
     });
@@ -250,6 +247,7 @@ export default {
       showIndex,
       showIndexFn,
       swiperData,
+      totalSpotData,
       hotSpotData,
       activityData,
       restaurantData,
