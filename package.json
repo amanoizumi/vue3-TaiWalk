@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
@@ -12,6 +13,7 @@
     "@vueuse/core": "^7.7.1",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
+    "gh-pages": "^6.0.0",
     "jssha": "^3.2.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
