@@ -192,6 +192,9 @@ export default {
         totalSpotData = spotData.data;
       } catch (err) {
         console.dir('無法取得資料', err);
+        if (err.response.status === 429) {
+          alert('本日「觀光景點」的 API 請求已超過上限，請隔日再嘗試');
+        }
       }
     };
 
@@ -221,7 +224,10 @@ export default {
         const res = await getActivityApi();
         activityData.value = afterDayActivity(getTodayDateStr(), res.data).slice(0, 4);
       } catch (err) {
-        console.dir(err);
+        console.dir('無法取得資料', err);
+        if (err.response.status === 429) {
+          alert('本日「節慶活動」的 API 請求已超過上限，請隔日再嘗試');
+        }
       }
     };
 
@@ -230,17 +236,21 @@ export default {
         const res = await getRestaurantApi();
         restaurantData.value = res.data.splice(0, 4);
       } catch (err) {
-        console.dir(err);
+        console.dir('無法取得資料', err);
+        if (err.response.status === 429) {
+          alert('本日「餐聽」的 API 請求已超過上限，請隔日再嘗試');
+        }
       }
     };
 
+    
+
     onMounted(async () => {
       await callScenicSpot();
-
-      scenicForSwiper();
-
       callActivity();
       callRestaurant();
+
+      scenicForSwiper();
     });
 
     return {
