@@ -191,10 +191,7 @@ export default {
         const spotData = await getScenicSpotApi();
         totalSpotData = spotData.data;
       } catch (err) {
-        console.dir('無法取得資料', err);
-        if (err.response.status === 429) {
-          alert('本日「觀光景點」的 API 請求已超過上限，請隔日再嘗試');
-        }
+        console.dir(err);
       }
     };
 
@@ -246,11 +243,15 @@ export default {
     
 
     onMounted(async () => {
-      await callScenicSpot();
-      callActivity();
-      callRestaurant();
-
-      scenicForSwiper();
+      try {
+        await callScenicSpot();
+        scenicForSwiper();
+        callActivity();
+        callRestaurant();
+      } catch (err) {
+        console.dir(err);
+        alert('目前無法取得資料');
+      }
     });
 
     return {
