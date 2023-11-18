@@ -1,12 +1,12 @@
 <template>
   <Layout>
-    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px]  px-[15px]">
+    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
       <Breadcrumb class="mb-8" v-if="breadcrumbItem.length > 0" :breadcrumb-li="breadcrumbItem" />
       <!-- 選縣市 -->
       <section class="mb-[60px] flex flex-col md:flex-row">
         <select
-          class="md:mr-[15px] md:w-60 cursor-pointer md:mb-0 mb-2 rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
+          class="mb-2 cursor-pointer rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
           v-model="citySelectModel"
         >
           <option
@@ -20,7 +20,7 @@
         </select>
         <!-- 選主題類別 -->
         <select
-          class="md:mr-[15px] md:w-60 rounded-md md:mb-0 mb-2 border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
+          class="mb-2 rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
           v-model="classSelectModel"
         >
           <option value="請選擇分類" selected>請選擇分類</option>
@@ -31,14 +31,14 @@
         <!-- 輸入框 -->
         <input
           type="text"
-          class="md:mr-[15px] flex-1 md:mb-0 mb-2 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
+          class="mb-2 flex-1 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b] md:mr-[15px] md:mb-0"
           placeholder="你想吃什麼？請輸入關鍵字"
           v-model="inputStr"
           @keyup.enter="submitDataFilter"
         />
         <button
           type="button"
-          class="flex h-[50px] md:w-[210px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60]"
+          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] md:w-[210px]"
           @click="submitDataFilter"
         >
           <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>
@@ -54,7 +54,7 @@
           </div>
           <!-- 熱門主題 -->
           <h2 class="mb-3 text-4xl font-thin">熱門分類</h2>
-          <ul class="mb-3 grid md:grid-cols-4 grid-cols-2 gap-x-[15px]">
+          <ul class="mb-3 grid grid-cols-2 gap-x-[15px] md:grid-cols-4">
             <!-- 主題卡片 -->
             <SearchPageCard
               @emit-class-data="classDataFilter"
@@ -73,7 +73,7 @@
               共 <span class="text-orange-500">{{ dataLen }}</span> 筆
             </p>
           </h2>
-          <ul class="grid md:grid-cols-4 grid-cols-1 gap-x-[30px]">
+          <ul class="grid grid-cols-1 gap-x-[30px] md:grid-cols-4">
             <!-- PopCard -->
             <PopCard
               v-for="item in showPopCardData"
@@ -108,12 +108,12 @@ import chunk from 'lodash/chunk';
 import { getRestaurantApi } from '@/api/axios';
 import cityData from '@/services/cityData';
 
-import img01 from '@/assets/img/restaurant_01.png'
-import img02 from '@/assets/img/restaurant_02.png'
-import img03 from '@/assets/img/restaurant_03.png'
-import img04 from '@/assets/img/restaurant_04.png'
-import img05 from '@/assets/img/restaurant_05.png'
-import img06 from '@/assets/img/restaurant_06.png'
+import img01 from '@/assets/img/restaurant_01.png';
+import img02 from '@/assets/img/restaurant_02.png';
+import img03 from '@/assets/img/restaurant_03.png';
+import img04 from '@/assets/img/restaurant_04.png';
+import img05 from '@/assets/img/restaurant_05.png';
+import img06 from '@/assets/img/restaurant_06.png';
 
 export default {
   emits: {
@@ -130,7 +130,7 @@ export default {
     const dateInput = ref('');
     const inputStr = ref('');
 
-    const activityData = ref([]);
+    const restaurantData = ref([]);
 
     const dataLen = ref(0);
     const showPopCardData = ref([]);
@@ -183,7 +183,7 @@ export default {
     const callRestaurantApi = async () => {
       try {
         const res = await getRestaurantApi(0, false);
-        activityData.value = res.data;
+        restaurantData.value = res.data;
       } catch (err) {
         console.dir(err);
       }
@@ -199,7 +199,7 @@ export default {
       if (citySelectVal === '全部縣市') citySelectVal = '';
       if (classSelectVal === '請選擇分類') classSelectVal = '';
 
-      showPopCardData.value = activityData.value;
+      showPopCardData.value = restaurantData.value;
 
       if (citySelectVal !== '') {
         showPopCardData.value = cityDataFilter(citySelectVal, showPopCardData.value);
@@ -211,6 +211,7 @@ export default {
       if (inputStr.value !== '') {
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
       }
+      
       createPagination(showPopCardData.value);
       inputStr.value = '';
     };
@@ -226,7 +227,7 @@ export default {
     };
 
     // 字串篩選
-    const inputStringFilter = (inputStr, arr = activityData.value) => {
+    const inputStringFilter = (inputStr, arr = restaurantData.value) => {
       const result = arr.filter((item) => {
         return item.ActivityName?.includes(inputStr) || item.Description?.includes(inputStr);
       });
@@ -234,7 +235,7 @@ export default {
     };
 
     // 點選卡片篩選資料
-    const classDataFilter = (classStr, arr = activityData.value) => {
+    const classDataFilter = (classStr, arr = restaurantData.value) => {
       const result = arr.filter((item) => {
         if (item.hasOwnProperty('Class1') && item.Class1 === classStr) {
           return item;
@@ -253,7 +254,7 @@ export default {
     };
 
     // 依縣市篩選資料
-    const cityDataFilter = (city, arr = activityData.value) => {
+    const cityDataFilter = (city, arr = restaurantData.value) => {
       const result = arr.filter((item) => {
         return item.Address?.includes(city) || item.City?.includes(city);
       });
@@ -306,7 +307,7 @@ export default {
       img03,
       img04,
       img05,
-      img06
+      img06,
     };
   },
 };
