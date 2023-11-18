@@ -222,9 +222,6 @@ export default {
         activityData.value = afterDayActivity(getTodayDateStr(), res.data).slice(0, 4);
       } catch (err) {
         console.dir('無法取得資料', err);
-        if (err.response.status === 429) {
-          alert('本日「節慶活動」的 API 請求已超過上限，請隔日再嘗試');
-        }
       }
     };
 
@@ -234,9 +231,6 @@ export default {
         restaurantData.value = res.data.splice(0, 4);
       } catch (err) {
         console.dir('無法取得資料', err);
-        if (err.response.status === 429) {
-          alert('本日「餐聽」的 API 請求已超過上限，請隔日再嘗試');
-        }
       }
     };
 
@@ -250,7 +244,7 @@ export default {
         callRestaurant();
       } catch (err) {
         console.dir(err);
-        alert('目前無法取得資料');
+        alert('今日 API 請求次數已達上限');
       }
     });
 
