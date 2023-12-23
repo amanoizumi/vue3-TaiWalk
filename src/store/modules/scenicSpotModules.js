@@ -1,4 +1,4 @@
-import { getScenicSpotApi } from '@/api/axios';
+import { getScenicSpotApi } from '@/api/tdx';
 
 const state = {
   scenicSpot: [],
@@ -35,8 +35,8 @@ const actions = {
   async getScenicSpot(context) {
     // context.commit('LOADING', true, { root: true });
     try {
-      const { data } = await getScenicSpotApi();
-      context.commit('SCENIC_SPOT', data);
+      const data = await getScenicSpotApi();
+      context.commit('SCENIC_SPOT', data.data);
     } catch (err) {
       console.dir(err);
     } 

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 
 const id = import.meta.env.VITE_API_ID;
 const key = import.meta.env.VITE_API_KEY;
@@ -9,33 +8,53 @@ const url = import.meta.env.VITE_API_URL;
 
 // 取得 token
 const getAuthorizationHeader = async () => {
-  const auth_url = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token';
+  const authUrl = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token';
 
-  const parameter = {
+  const parameters = {
     grant_type: 'client_credentials',
     client_id: id,
     client_secret: key,
   };
 
-  const auth = await axios.post(auth_url, qs.stringify(parameter));
-  const token = `Bearer ${auth.data.access_token}`;
+  try {
+    const response = await axios.post(authUrl, parameters, {
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-  return token;
+    const token = response.data.access_token;
+    return token;
+  } catch (error) {
+    console.dir('Error in getting authorization:', error);
+    return null;
+  }
 };
 /* === 觀光景點 API ===*/
 // 取得所有觀光景點資料
-export const getScenicSpotApi = () => {
-  const apiUrl = `${url}/ScenicSpot?$filter=Picture/PictureUrl1 ne null`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
-};
+export const getScenicSpotApi = async () => {
+  try {
+    const token = await getAuthorizationHeader()
+    const apiUrl = `${url}/ScenicSpot?$filter=Picture/PictureUrl1 ne null`;
+    
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+  } catch (error) {
+    console.error("Error in API request:", error);
+    return null;
+  }}
+
 
 // 取得指定縣市的觀光景點資料('縣市英文名稱', 前 1 筆)
 export const getScenicSpotByCountyApi = (county, num) => {
   const apiUrl = `${url}/ScenicSpot/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
+
   return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
+    Authorization: getAuthorizationHeader(),
   });
 };
 export const getActivityByCountyApi = (county, num) => {

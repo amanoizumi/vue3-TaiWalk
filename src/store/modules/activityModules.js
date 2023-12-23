@@ -1,4 +1,4 @@
-import { getActivityApi } from '@/api/axios';
+import { getActivityApi } from '@/api/tdx';
 // import { afterDayActivity, getTodayDateStr } from '@/services/activity';
 
 const state = {

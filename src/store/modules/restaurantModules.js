@@ -1,4 +1,4 @@
-import { getRestaurantApi } from '@/api/axios';
+import { getRestaurantApi } from '@/api/tdx';
 
 const state = {
   restaurants: [],

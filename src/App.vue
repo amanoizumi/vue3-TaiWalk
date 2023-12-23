@@ -2,7 +2,7 @@
   <Loading :active.sync="isLoading">
     <PageLoadingIcon></PageLoadingIcon>
   </Loading>
-  <div class="z-20 absolute inset-0 bg-white duration-200"  v-show="!showIndexPage"></div>
+  <!-- <div class="z-20 absolute inset-0 bg-white duration-200"  v-show="!showIndexPage"></div> -->
 
   <RouterView />
 </template>

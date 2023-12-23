@@ -188,8 +188,8 @@ export default {
     onMounted(() => {
       try {
         callScenicSpot()
-        callActivity();
-        callRestaurant();
+        // callActivity();
+        // callRestaurant();
       } catch (err) {
         console.dir(err);
       }
