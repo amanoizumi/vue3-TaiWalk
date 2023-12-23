@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <div class="z-10 absolute inset-0 bg-black duration-200"  v-show="!showIndexPage"></div>
     <div class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
       <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
         <div class="col-span-2">
@@ -179,12 +178,10 @@ export default {
     const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
     const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
     
-    const showIndexPage = ref(false);
-
 
     watchEffect(() => {
       if(hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
-        showIndexPage.value = true;
+        // ...
       }
     })
 
@@ -199,7 +196,6 @@ export default {
     });
 
     return {
-      showIndexPage,
       swiperData,
       hotSpotData,
       activityData,

@@ -2,6 +2,8 @@
   <Loading :active.sync="isLoading">
     <PageLoadingIcon></PageLoadingIcon>
   </Loading>
+  <div class="z-20 absolute inset-0 bg-white duration-200"  v-show="!showIndexPage"></div>
+
   <RouterView />
 </template>
 <script>
@@ -18,7 +20,11 @@ export default {
   setup(props) {
     const store = useStore();
     const isLoading = computed(() => store.getters['isLoading']);
+
+    const showIndexPage = ref(false);
+
     return {
+      showIndexPage,
       isLoading,
     };
   },
