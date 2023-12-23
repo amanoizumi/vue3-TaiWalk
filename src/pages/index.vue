@@ -141,9 +141,11 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
-import { getScenicSpotApi, getActivityApi, getRestaurantApi } from '@/api/axios';
+// import { getScenicSpotApi, getActivityApi, getRestaurantApi } from '@/api/axios';
+
+import { useStore } from 'vuex';
 import { afterDayActivity, getTodayDateStr } from '@/services/activity';
 
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
@@ -170,12 +172,14 @@ export default {
     SwiperSlide,
   },
   setup(props, { emit }) {
-    const swiperData = ref([]);
+    const store = useStore();
 
-    // 景點純資料
-    let totalSpotData = [];
+    // 景點資料
+    const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
+    const hotSpotData = computed(() => store.state.scenicSpot);
+    const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
+    
 
-    const hotSpotData = ref([]);
     const activityData = ref([]);
     const restaurantData = ref([]);
     const showIndex = ref(false);
@@ -185,36 +189,6 @@ export default {
     };
 
     emit('show-index', showIndexFn);
-
-    const callScenicSpot = async () => {
-      try {
-        const spotData = await getScenicSpotApi();
-        totalSpotData = spotData.data;
-      } catch (err) {
-        console.dir(err);
-      }
-    };
-
-    const scenicForSwiper = () => {
-      const hasCityData = totalSpotData.filter((item) => {
-        return item.hasOwnProperty('City');
-      });
-
-      // 取出目標縣市的第一筆資料來顯示到 Swiper
-      let obj = {
-        新北市: 0,
-        高雄市: 0,
-        花蓮縣: 0,
-        雲林縣: 0,
-      };
-
-      hasCityData.forEach((item) => {
-        if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
-          obj[item.City] += 1;
-          swiperData.value.push(item);
-        }
-      });
-    };
 
     const callActivity = async () => {
       try {
@@ -233,26 +207,30 @@ export default {
         console.dir('無法取得資料', err);
       }
     };
-
-    
-
     onMounted(async () => {
       try {
         await callScenicSpot();
-        scenicForSwiper();
-        callActivity();
-        callRestaurant();
+
       } catch (err) {
         console.dir(err);
-        alert('今日 API 請求次數已達上限');
       }
     });
+    // onMounted(async () => {
+    //   try {
+    //     await callScenicSpot();
+    // scenicForSwiper();
+    // callActivity();
+    // callRestaurant();
+    // } catch (err) {
+    // console.dir(err);
+    // alert('今日 API 請求次數已達上限');
+    //   }
+    // });
 
     return {
       showIndex,
       showIndexFn,
       swiperData,
-      totalSpotData,
       hotSpotData,
       activityData,
       restaurantData,
