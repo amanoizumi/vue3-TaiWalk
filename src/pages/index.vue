@@ -1,7 +1,6 @@
 <template>
-  <LandingPageLoading @show-index="showIndexFn" />
   <Layout>
-    <div :class="{ invisible: !showIndex }" class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
+    <div class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
       <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
         <div class="col-span-2">
           <h2
@@ -191,11 +190,13 @@ export default {
 
     emit('show-index', showIndexFn);
 
-    onMounted(async () => {
+    onMounted(() => {
       try {
-        await callScenicSpot();
-        callActivity();
-        callRestaurant();
+        
+        callScenicSpot()
+  
+        // callActivity();
+        // callRestaurant();
       } catch (err) {
         console.dir(err);
       }

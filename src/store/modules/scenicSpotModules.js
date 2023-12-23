@@ -14,7 +14,7 @@ const getters = {
       新北市: 0,
       高雄市: 0,
       花蓮縣: 0,
-      雲林縣: 0,
+      桃園市: 0,
     };
 
     const arr = [];
@@ -32,11 +32,15 @@ const getters = {
 
 const actions = {
   async getScenicSpot(context) {
+    context.commit('LOADING', true, { root: true });
     try {
-      const spotData = await getScenicSpotApi();
-      context.commit('SCENIC_SPOT', spotData.data);
+      const { data } = await getScenicSpotApi();
+      context.commit('SCENIC_SPOT', data);
     } catch (err) {
       console.dir(err);
+    } finally {
+      context.commit('LOADING', false, { root: true });
+      
     }
   },
 };
