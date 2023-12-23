@@ -12,12 +12,16 @@ const getters = {
 
 const actions = {
   async getRestaurant(context) {
+    // context.commit('LOADING', true, { root: true });
     try {
       const { data } = await getRestaurantApi();
       context.commit('RESTAURANT', data);
     } catch (err) {
       console.dir(err);
-    }
+    } 
+    // finally {
+    //   context.commit('LOADING', false, { root: true });
+    // }
   },
 };
 

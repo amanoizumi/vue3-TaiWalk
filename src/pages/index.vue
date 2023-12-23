@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <div class="z-10 absolute inset-0 bg-black duration-200"  v-show="!showIndexPage"></div>
     <div class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
       <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
         <div class="col-span-2">
@@ -22,7 +23,7 @@
           </div>
         </div>
 
-        <div class="grid h-[164px] grid-rows-3 gap-y-[7px] lg:mt-5">
+        <div class="grid h-[164px] grid-rowshttps://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C-3 gap-y-[7px] lg:mt-5">
           <SearchAttraction />
         </div>
       </header>
@@ -140,7 +141,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
@@ -169,42 +170,36 @@ export default {
   setup(props, { emit }) {
     const store = useStore();
 
-    // 景點資料
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
-    const hotSpotData = computed(() => store.state.scenicSpot);
-    const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
-
-    // 活動資料
     const callActivity = () => store.dispatch('activityModules/getActivity');
-    const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
-
-    // 餐廳資料
     const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
+
+    const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
+    const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
+    const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
     const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
+    
+    const showIndexPage = ref(false);
 
-    const showIndex = ref(false);
 
-    const showIndexFn = () => {
-      showIndex.value = true;
-    };
-
-    emit('show-index', showIndexFn);
+    watchEffect(() => {
+      if(hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
+        showIndexPage.value = true;
+      }
+    })
 
     onMounted(() => {
       try {
-        
         callScenicSpot()
-  
-        // callActivity();
-        // callRestaurant();
+        callActivity();
+        callRestaurant();
       } catch (err) {
         console.dir(err);
       }
     });
 
     return {
-      showIndex,
-      showIndexFn,
+      showIndexPage,
       swiperData,
       hotSpotData,
       activityData,

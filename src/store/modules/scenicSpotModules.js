@@ -5,6 +5,7 @@ const state = {
 };
 
 const getters = {
+  scenicSpot: (state) => state.scenicSpot,
   scenicForSwiper: (state) => {
     const hasCityData = state.scenicSpot.filter((item) => {
       return item.hasOwnProperty('City');
@@ -32,16 +33,17 @@ const getters = {
 
 const actions = {
   async getScenicSpot(context) {
-    context.commit('LOADING', true, { root: true });
+    // context.commit('LOADING', true, { root: true });
     try {
       const { data } = await getScenicSpotApi();
       context.commit('SCENIC_SPOT', data);
     } catch (err) {
       console.dir(err);
-    } finally {
-      context.commit('LOADING', false, { root: true });
+    } 
+    // finally {
+    //   context.commit('LOADING', false, { root: true });
       
-    }
+    // }
   },
 };
 
