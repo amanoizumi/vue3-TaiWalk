@@ -142,11 +142,7 @@
 
 <script>
 import { ref, onMounted, computed } from 'vue';
-
-// import { getScenicSpotApi, getActivityApi, getRestaurantApi } from '@/api/axios';
-
 import { useStore } from 'vuex';
-import { afterDayActivity, getTodayDateStr } from '@/services/activity';
 
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
 import heroIconsLocation from '~icons/heroicons-solid/location-marker';
@@ -178,10 +174,15 @@ export default {
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
     const hotSpotData = computed(() => store.state.scenicSpot);
     const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
-    
 
-    const activityData = ref([]);
-    const restaurantData = ref([]);
+    // 活動資料
+    const callActivity = () => store.dispatch('activityModules/getActivity');
+    const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
+
+    // 餐廳資料
+    const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
+    const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
+
     const showIndex = ref(false);
 
     const showIndexFn = () => {
@@ -190,42 +191,15 @@ export default {
 
     emit('show-index', showIndexFn);
 
-    const callActivity = async () => {
-      try {
-        const res = await getActivityApi();
-        activityData.value = afterDayActivity(getTodayDateStr(), res.data).slice(0, 4);
-      } catch (err) {
-        console.dir('無法取得資料', err);
-      }
-    };
-
-    const callRestaurant = async () => {
-      try {
-        const res = await getRestaurantApi();
-        restaurantData.value = res.data.splice(0, 4);
-      } catch (err) {
-        console.dir('無法取得資料', err);
-      }
-    };
     onMounted(async () => {
       try {
         await callScenicSpot();
-
+        callActivity();
+        callRestaurant();
       } catch (err) {
         console.dir(err);
       }
     });
-    // onMounted(async () => {
-    //   try {
-    //     await callScenicSpot();
-    // scenicForSwiper();
-    // callActivity();
-    // callRestaurant();
-    // } catch (err) {
-    // console.dir(err);
-    // alert('今日 API 請求次數已達上限');
-    //   }
-    // });
 
     return {
       showIndex,

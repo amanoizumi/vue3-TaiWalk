@@ -5,7 +5,7 @@ const state = {
 };
 
 const getters = {
-  scenicForSwiper: (state, getters, rootState) => {
+  scenicForSwiper: (state) => {
     const hasCityData = state.scenicSpot.filter((item) => {
       return item.hasOwnProperty('City');
     });
@@ -28,7 +28,6 @@ const getters = {
 
     return arr;
   },
-
 };
 
 const actions = {
@@ -39,32 +38,13 @@ const actions = {
     } catch (err) {
       console.dir(err);
     }
-    // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
-    // context.commit('LOADING', true, { root: true });
-    // axios.get(url).then((response) => {
-    //   context.commit('PRODUCTS', response.data.products);
-    //   context.commit('CATEGORIES', response.data.products);
-    //   console.log('取得產品列表:', response);
-    //   context.commit('LOADING', false, { root: true });
-    // });
   },
-
 };
 
 const mutations = {
   SCENIC_SPOT(state, payload) {
     state.scenicSpot = payload;
   },
-  // PRODUCTS(state, payload) {
-  //   state.products = payload;
-  // },
-  // CATEGORIES(state, payload) {
-  //   const categories = new Set();
-  //   payload.forEach((item) => {
-  //     categories.add(item.category);
-  //   });
-  //   state.categories = Array.from(categories);
-  // },
 };
 
 export default {
@@ -74,52 +54,3 @@ export default {
   actions,
   mutations,
 };
-
-// export default {
-// state 屬於模組區域變數
-// actions, mutations, getters 是屬於全域變數
-// namespaced: true, // actions, mutations, getters 是屬於區域變數
-// state: {
-//   scenicSpot: [],
-// },
-// actions: {
-//   async callScenicSpot(context) {
-//     try {
-//       console.log('callScenicSpot');
-//       const spotData = await getScenicSpotApi();
-//       console.log(spotData.data);
-//       context.commit('SCENIC_SPOT', spotData.data);
-//     } catch (err) {
-//       console.dir(err);
-//     }
-//     // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
-//     // context.commit('LOADING', true, { root: true });
-//     // axios.get(url).then((response) => {
-//     //   context.commit('PRODUCTS', response.data.products);
-//     //   context.commit('CATEGORIES', response.data.products);
-//     //   console.log('取得產品列表:', response);
-//     //   context.commit('LOADING', false, { root: true });
-//     // });
-//   },
-// },
-// mutations: {
-//   SCENIC_SPOT(state, payload) {
-//     state.scenicSpot = payload;
-//   },
-//   // PRODUCTS(state, payload) {
-//   //   state.products = payload;
-//   // },
-//   // CATEGORIES(state, payload) {
-//   //   const categories = new Set();
-//   //   payload.forEach((item) => {
-//   //     categories.add(item.category);
-//   //   });
-//   //   state.categories = Array.from(categories);
-//   // },
-// },
-// getters: {
-// scenicSpot: (state) => state.scenicSpot,
-// categories: state => state.categories,
-// products: state => state.products,
-// },
-// };
