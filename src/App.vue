@@ -1,16 +1,14 @@
 <template>
-  <Loading :active.sync="isLoading">
+  <Loading class="z-30 bg-[#ffffff] bg-opacity-90" :lock-scroll="true" :active.sync="pageLoading">
     <PageLoadingIcon></PageLoadingIcon>
   </Loading>
-  <!-- <div class="z-20 absolute inset-0 bg-white duration-200"  v-show="!showIndexPage"></div> -->
-
   <RouterView />
 </template>
 <script>
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
@@ -19,13 +17,13 @@ export default {
   },
   setup(props) {
     const store = useStore();
-    const isLoading = computed(() => store.getters['isLoading']);
+    const pageLoading = computed(() => store.getters['loadingModules/pageLoading']);
 
     const showIndexPage = ref(false);
 
     return {
       showIndexPage,
-      isLoading,
+      pageLoading,
     };
   },
 };

@@ -125,14 +125,16 @@
         </div>
 
         <ul class="md:grid md:grid-cols-4 md:gap-x-[30px]">
-          <PopCard
-            v-for="item in restaurantData"
-            :key="item.RestaurantID"
-            :id="item.RestaurantID"
-            :title="item.RestaurantName"
-            :imageUrl="item.Picture.PictureUrl1"
-            :address="item.Address"
-          />
+          <!-- <template v-if="restaurantData.length"> -->
+            <PopCard
+              v-for="item in restaurantData"
+              :key="item.RestaurantID"
+              :id="item.RestaurantID"
+              :title="item.RestaurantName"
+              :imageUrl="item.Picture.PictureUrl1"
+              :address="item.Address"
+            />
+          <!-- </template> -->
         </ul>
       </section>
     </div>
@@ -181,12 +183,14 @@ export default {
 
     watchEffect(() => {
       if(hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
-        // ...
+        store.dispatch('loadingModules/updatePageLoading', false);
       }
     })
 
     onMounted(() => {
       try {
+        store.dispatch('loadingModules/updatePageLoading', true);
+        
         callScenicSpot()
         callActivity();
         callRestaurant();

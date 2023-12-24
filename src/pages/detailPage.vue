@@ -181,7 +181,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute,  useRouter} from 'vue-router';
 import { getDetailByIDApi } from '@/api/tdx';
 import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
@@ -191,6 +191,7 @@ import icon from '@/assets/icon/pin.svg';
 export default {
   setup() {
     const route = useRoute();
+    const router = useRouter();
 
     const breadcrumbItem = ref([
       {
@@ -315,6 +316,8 @@ export default {
         createBreadcrumbObj(id);
       } catch (err) {
         console.dir(err);
+        console.dir('無此頁面，即將跳轉回首頁');
+        router.push('/')
       }
     };
 
@@ -391,4 +394,3 @@ export default {
   },
 };
 </script>
-@/api/tdx@/api/tdx@/api/tdx@/api/tdx
