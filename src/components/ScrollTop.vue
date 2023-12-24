@@ -1,6 +1,7 @@
 <template>
   <div
-    class="scroll-top fixed flex cursor-pointer shadow-lg justify-center items-center p-5 bottom-10 right-10 text-zinc-50 bg-[#7f977b] hover:bg-[#ff725e] w-18 h-18"
+    ref="scrollBtn"
+    class="scroll-top w-12 h-12 fixed bottom-8 right-8 flex cursor-pointer items-center justify-center bg-[#7f977b] p-3 text-zinc-50 shadow-lg hover:bg-[#ff725e]"
     title="回到上方"
     @click="scrollTop"
   >
@@ -9,11 +10,15 @@
 </template>
 
 <script>
+import { ref, watch, computed } from 'vue';
+import { useScroll } from '@vueuse/core';
+
 export default {
   setup() {
     const scrollTop = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
     return { scrollTop };
   },
 };

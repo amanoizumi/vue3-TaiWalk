@@ -1,5 +1,5 @@
 <template>
-    <NewTitle :titleContent="title"/>
+  <NewTitle :titleContent="title" />
   <Layout>
     <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
@@ -10,9 +10,9 @@
         :last-item="breadcrumbLastStr"
       />
       <section class="mb-[30px]">
-        <div class="h-[185px] overflow-hidden rounded-3xl md:h-[400px]">
+        <div class="h-[250px] overflow-hidden rounded-3xl bg-[#CCD5CA] md:h-[400px] flex justify-center">
           <img
-            class="h-full w-full object-cover"
+            class="w-30 object-cover"
             v-real-img="showDetailData.Picture"
             :src="showDetailData.Picture"
             :alt="showDetailData.Picture"
@@ -182,7 +182,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRoute,  useRouter} from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { getDetailByIDApi } from '@/api/tdx';
 import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
@@ -201,7 +201,7 @@ export default {
       },
     ]);
 
-    const title = ref('介紹')
+    const title = ref('介紹');
     const breadcrumbLastStr = ref('');
 
     const detailData = ref({});
@@ -319,7 +319,7 @@ export default {
       } catch (err) {
         console.dir(err);
         console.dir('無此頁面，即將跳轉回首頁');
-        router.push('/')
+        router.push('/');
       }
     };
 
