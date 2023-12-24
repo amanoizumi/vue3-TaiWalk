@@ -38,7 +38,7 @@
         />
         <button
           type="button"
-          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] md:w-[210px]"
+          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] md:w-[210px] active:ring-4  active:ring-[#647a6060]"
           @click="submitDataFilter"
         >
           <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>

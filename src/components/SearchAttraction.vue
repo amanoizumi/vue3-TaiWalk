@@ -18,7 +18,7 @@
   <button
     type="button"
     @click="submit"
-    class="flex justify-center items-center bg-[#7f977b] text-white rounded-md hover:bg-[#647a60]"
+    class="flex justify-center items-center bg-[#7f977b] text-white rounded-md hover:bg-[#647a60] active:ring-4  active:ring-[#647a6060]"
   >
     <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span>搜&emsp;&emsp;尋</span>
   </button>
