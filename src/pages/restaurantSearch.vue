@@ -1,4 +1,5 @@
 <template>
+    <NewTitle :titleContent="'品嚐美食'"/>
   <Layout>
     <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->

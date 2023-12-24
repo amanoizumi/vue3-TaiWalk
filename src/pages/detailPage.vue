@@ -1,4 +1,5 @@
 <template>
+    <NewTitle :titleContent="title"/>
   <Layout>
     <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
@@ -200,6 +201,7 @@ export default {
       },
     ]);
 
+    const title = ref('介紹')
     const breadcrumbLastStr = ref('');
 
     const detailData = ref({});
@@ -377,6 +379,7 @@ export default {
     });
 
     return {
+      title,
       callDetailByIDApi,
       breadcrumbItem,
       showDetailData,

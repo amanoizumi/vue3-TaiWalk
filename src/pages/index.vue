@@ -1,4 +1,5 @@
 <template>
+  <NewTitle :titleContent="'首頁'"/>
   <Layout>
     <div class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
       <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
