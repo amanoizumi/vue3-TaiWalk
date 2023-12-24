@@ -20,7 +20,7 @@
     @click="submit"
     class="flex justify-center items-center bg-[#7f977b] text-white rounded-md hover:bg-[#647a60]"
   >
-    <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>
+    <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span>搜&emsp;&emsp;尋</span>
   </button>
 </template>
 <script>
@@ -48,26 +48,17 @@ export default {
 
     const submit = () => {
       const val = defaultSelect.value;
-      let pushStr = '';
 
-      switch (val) {
-        case '探索景點':
-          pushStr = 'scenicSpotSearch';
-          break;
-
-        case '節慶活動':
-          pushStr = 'activitySearch';
-          break;
-
-        case '品嚐美食':
-          pushStr = 'restaurantSearch';
-          break;
-
-        default:
-          break;
+      const linkOption = {
+        '探索景點' : 'scenicSpotSearch',
+        '節慶活動' : 'activitySearch',
+        '品嚐美食': 'restaurantSearch'
       }
+      console.log(val);
+      console.log(linkOption[val]);
+
       router.push({
-        name: `${pushStr}`,
+        name: linkOption[val],
         params: {
           str: scenicStr.value,
         },

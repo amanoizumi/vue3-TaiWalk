@@ -105,7 +105,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getRestaurantApi } from '@/api/axios';
+import { getRestaurantApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
 
 import img01 from '@/assets/img/restaurant_01.png';
