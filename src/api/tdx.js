@@ -83,7 +83,7 @@ export const getActivityByCountyApi = async (county, num) => {
 export const getRestaurantByCountyApi = async (county, num) => {
   try {
     const token = await getAuthorizationHeader();
-    const apiUrl = `${url}/Restaurant/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
+    const apiUrl = `${url}/Restaurant/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}&$`;
 
     return await axios.get(apiUrl, {
       headers: {

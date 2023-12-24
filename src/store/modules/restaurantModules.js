@@ -1,4 +1,4 @@
-import { getRestaurantApi } from '@/api/tdx';
+import { getRestaurantApi, getRestaurantByCountyApi } from '@/api/tdx';
 
 const state = {
   restaurants: [],
@@ -6,7 +6,26 @@ const state = {
 
 const getters = {
   restaurantsIndexPageData: (state, getters, rootState) => {
-    return state.restaurants.slice(0, 4);
+    const hasCityData = state.restaurants.filter((item) => {
+      return item.hasOwnProperty('City');
+    });
+
+    const obj = {
+      新北市: 0,
+      高雄市: 0,
+      花蓮縣: 0,
+      桃園市: 0,
+    };
+    const arr = [];
+
+    state.restaurants.forEach((item) => {
+      if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
+        arr.push(item);
+        obj[item.City] += 1;
+      }
+    });
+
+    return arr;
   },
   restaurantsData: (state) => {
     return state.restaurants
@@ -15,16 +34,12 @@ const getters = {
 
 const actions = {
   async getRestaurant(context) {
-    // context.commit('LOADING', true, { root: true });
     try {
-      const { data } = await getRestaurantApi();
+      const { data } = await getRestaurantApi(0, false);
       context.commit('RESTAURANT', data);
     } catch (err) {
       console.dir(err);
     } 
-    // finally {
-    //   context.commit('LOADING', false, { root: true });
-    // }
   },
 };
 

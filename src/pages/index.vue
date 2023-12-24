@@ -85,7 +85,7 @@
             :start-time="item.StartTime"
             :end-time="item.EndTime"
             :location="item.Location"
-            :picture="item.Picture.PictureUrl1"
+            :picture="item.Picture?.PictureUrl1"
           />
         </div>
       </section>
@@ -176,8 +176,10 @@ export default {
     const store = useStore();
 
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
+    const callRestaurantByCounty = () => store.dispatch('restaurantModules/getRestaurantByCounty');
     const callActivity = () => store.dispatch('activityModules/getActivity');
     const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
+
 
     const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
     const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
@@ -197,6 +199,7 @@ export default {
         callScenicSpot();
         callActivity();
         callRestaurant();
+        callRestaurantByCounty()
       } catch (err) {
         console.dir(err);
       }

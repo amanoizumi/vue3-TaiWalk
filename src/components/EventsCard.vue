@@ -2,7 +2,7 @@
   <RouterLink class="hover:opacity-90" :to="`/detailPage/${id}`">
     <div class="flex h-40 overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f9f9f9]">
       <div class="w-40">
-        <img class="h-40 object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
+        <img class="h-40 w-full object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
       </div>
       <div class="flex flex-1 flex-col px-[30px] py-4">
         <p class="mb-1 text-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
@@ -33,12 +33,30 @@ export default {
     heroIconsChevronRight,
   },
   props: {
-    title: String,
-    startTime: String,
-    endTime: String,
-    location: String,
-    picture: String,
-    id: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    startTime: {
+      type: String,
+      default: '',
+    },
+    endTime: {
+      type: String,
+      default: '',
+    },
+    location: {
+      type: String,
+      default: '',
+    },
+    picture: {
+      type: String,
+      default: noImg,
+    },
+    id: {
+      type: String,
+      default: '',
+    },
   },
   setup(props) {
     // 轉換格式

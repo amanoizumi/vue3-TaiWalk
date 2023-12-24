@@ -11,7 +11,7 @@ const getters = {
       return item.hasOwnProperty('City');
     });
 
-    let obj = {
+    const obj = {
       新北市: 0,
       高雄市: 0,
       花蓮縣: 0,
@@ -33,17 +33,12 @@ const getters = {
 
 const actions = {
   async getScenicSpot(context) {
-    // context.commit('LOADING', true, { root: true });
     try {
-      const data = await getScenicSpotApi();
+      const data = await getScenicSpotApi(0, false);
       context.commit('SCENIC_SPOT', data.data);
     } catch (err) {
       console.dir(err);
     } 
-    // finally {
-    //   context.commit('LOADING', false, { root: true });
-      
-    // }
   },
 };
 

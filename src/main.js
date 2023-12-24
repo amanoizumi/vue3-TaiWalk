@@ -13,7 +13,6 @@ const app = createApp(App);
 app.use(router);
 app.use(OpenLayersMap);
 app.use(store);
-
 // 加入全域自訂指令，替代尚未載入的遠端圖片
 app.directive('real-img', async (el, binding) => {
   const defaultImg = noImg; //預設圖片

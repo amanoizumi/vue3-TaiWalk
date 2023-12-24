@@ -7,7 +7,26 @@ const state = {
 
 const getters = {
   activityIndexPageData: (state, getters, rootState) => {
-    return state.activity.slice(0, 4);
+    const hasCityData = state.activity.filter((item) => {
+      return item.hasOwnProperty('City');
+    });
+
+    const obj = {
+      新北市: 0,
+      高雄市: 0,
+      花蓮縣: 0,
+      桃園市: 0,
+    };
+    const arr = [];
+
+    hasCityData.forEach((item) => {
+      if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
+        obj[item.City] += 1;
+        arr.push(item);
+      }
+    });
+
+    return arr;
   },
   activityData: (state, getters, rootState) => {
     return state.activity;
@@ -17,10 +36,10 @@ const getters = {
 const actions = {
   async getActivity(context) {
     try {
-      const activity = await getActivityApi();
-      context.commit('ACTIVITY', activity.data);
+      const { data } = await getActivityApi(0, false);
+      context.commit('ACTIVITY', data);
     } catch (err) {
-      console.dir(err);
+      console.error(err);
     }
   },
 };
