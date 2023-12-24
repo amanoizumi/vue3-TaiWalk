@@ -1,5 +1,5 @@
 <template>
-    <NewTitle :titleContent="'品嚐美食'"/>
+  <NewTitle :titleContent="'品嚐美食'" />
   <Layout>
     <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
@@ -39,7 +39,7 @@
         />
         <button
           type="button"
-          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] md:w-[210px] active:ring-4  active:ring-[#647a6060]"
+          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4 active:ring-[#647a6060] md:w-[210px]"
           @click="submitDataFilter"
         >
           <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>
@@ -212,7 +212,7 @@ export default {
       if (inputStr.value !== '') {
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
       }
-      
+
       createPagination(showPopCardData.value);
       inputStr.value = '';
     };

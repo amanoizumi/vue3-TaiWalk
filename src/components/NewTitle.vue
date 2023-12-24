@@ -1,7 +1,7 @@
 <script>
 export default {
   props: {
-    'titleContent': {
+    titleContent: {
       type: String,
       default: '',
     },
@@ -10,5 +10,5 @@ export default {
 </script>
 
 <template>
-  <teleport to="title"> {{  titleContent }} | TaiWalk 台灣旅遊景點導覽</teleport>
+  <teleport to="title"> {{ titleContent }} | TaiWalk 台灣旅遊景點導覽</teleport>
 </template>

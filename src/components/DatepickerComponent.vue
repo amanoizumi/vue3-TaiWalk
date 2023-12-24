@@ -16,7 +16,6 @@ import { ref, computed, watch } from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import { addMonths, getMonth, getYear } from 'date-fns';
 
-
 export default {
   components: { Datepicker },
   setup(props, { emit }) {
@@ -42,12 +41,10 @@ export default {
       let month = date.getMonth(n) + 1;
       let year = date.getFullYear(n);
 
-
       if (month < 10) month = '0' + month;
       if (day < 10) day = '0' + day;
 
       emitTime(`${year}-${month}-${day}`);
-
     });
 
     return {

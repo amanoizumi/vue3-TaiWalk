@@ -1,5 +1,5 @@
 <template>
-  <NewTitle :titleContent="'首頁'"/>
+  <NewTitle :titleContent="'首頁'" />
   <Layout>
     <div class="mx-auto max-w-[1200px] px-[20px] lg:px-[45px]">
       <header class="mt-14 flex flex-col pb-[60px] md:mt-[82px] md:px-[95px] lg:grid lg:grid-cols-3">
@@ -23,7 +23,9 @@
           </div>
         </div>
 
-        <div class="grid h-[164px] grid-rowshttps://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C-3 gap-y-[7px] lg:mt-5">
+        <div
+          class="grid-rowshttps://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C-3 grid h-[164px] gap-y-[7px] lg:mt-5"
+        >
           <SearchAttraction />
         </div>
       </header>
@@ -127,14 +129,14 @@
 
         <ul class="md:grid md:grid-cols-4 md:gap-x-[30px]">
           <!-- <template v-if="restaurantData.length"> -->
-            <PopCard
-              v-for="item in restaurantData"
-              :key="item.RestaurantID"
-              :id="item.RestaurantID"
-              :title="item.RestaurantName"
-              :imageUrl="item.Picture.PictureUrl1"
-              :address="item.Address"
-            />
+          <PopCard
+            v-for="item in restaurantData"
+            :key="item.RestaurantID"
+            :id="item.RestaurantID"
+            :title="item.RestaurantName"
+            :imageUrl="item.Picture.PictureUrl1"
+            :address="item.Address"
+          />
           <!-- </template> -->
         </ul>
       </section>
@@ -181,19 +183,18 @@ export default {
     const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
     const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
     const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
-    
 
     watchEffect(() => {
-      if(hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
+      if (hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
         store.dispatch('loadingModules/updatePageLoading', false);
       }
-    })
+    });
 
     onMounted(() => {
       try {
         store.dispatch('loadingModules/updatePageLoading', true);
-        
-        callScenicSpot()
+
+        callScenicSpot();
         callActivity();
         callRestaurant();
       } catch (err) {

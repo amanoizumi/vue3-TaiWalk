@@ -21,12 +21,13 @@ app.directive('real-img', async (el, binding) => {
 
   if (newLoadImg) {
     // 取資料前先插入預設圖片
-    el.setAttribute('src', defaultImg);
+    // el.setAttribute('src', defaultImg);
     //await : 等待判斷結果回傳
     const exist = await imageIsExist(newLoadImg);
     if (exist) {
       el.setAttribute('src', newLoadImg);
     } else {
+      
       el.setAttribute('src', defaultImg);
     }
   }

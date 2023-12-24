@@ -1,6 +1,6 @@
 <template>
   <select
-    class="text-[#6e7d60] border-[#e5e5e5] rounded-md focus:ring-[#7f977b] focus:border-[#7f977b] pl-[30px]"
+    class="rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
     @change="changeFn"
   >
     selectArr
@@ -10,7 +10,7 @@
   </select>
   <input
     type="text"
-    class="border-[#e5e5e5] bg-[#f9f9f9] rounded-md focus:ring-[#7f977b] focus:border-[#7f977b] focus:bg-white pl-[30px]"
+    class="rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
     placeholder="你想去哪裡？請輸入關鍵字"
     @keyup.enter="submit"
     v-model.trim="scenicStr"
@@ -18,7 +18,7 @@
   <button
     type="button"
     @click="submit"
-    class="flex justify-center items-center bg-[#7f977b] text-white rounded-md hover:bg-[#647a60] active:ring-4  active:ring-[#647a6060]"
+    class="flex items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4 active:ring-[#647a6060]"
   >
     <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span>搜&emsp;&emsp;尋</span>
   </button>
@@ -34,7 +34,6 @@ export default {
     heroiconsOutlineSearch,
   },
   setup() {
-    const route = useRoute();
     const router = useRouter();
 
     const selectArr = ref(['探索景點', '節慶活動', '品嚐美食']);
@@ -50,13 +49,10 @@ export default {
       const val = defaultSelect.value;
 
       const linkOption = {
-        '探索景點' : 'scenicSpotSearch',
-        '節慶活動' : 'activitySearch',
-        '品嚐美食': 'restaurantSearch'
-      }
-      console.log(val);
-      console.log(linkOption[val]);
-
+        探索景點: 'scenicSpotSearch',
+        節慶活動: 'activitySearch',
+        品嚐美食: 'restaurantSearch',
+      };
       router.push({
         name: linkOption[val],
         params: {

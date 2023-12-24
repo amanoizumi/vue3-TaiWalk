@@ -13,6 +13,9 @@
         <div class="h-[250px] overflow-hidden rounded-3xl bg-[#CCD5CA] md:h-[400px] flex justify-center">
           <img
             class="w-30 object-cover"
+            :class="{
+              'w-full': showDetailData.Picture?.split('/').pop() !== 'no_image.png'
+            }"
             v-real-img="showDetailData.Picture"
             :src="showDetailData.Picture"
             :alt="showDetailData.Picture"
@@ -76,7 +79,7 @@
 
           <div v-else-if="categoryStr === 'Restaurant'">
             <p class="mb-[14px]">
-              <span class="font-bold">營業時間：</span>{{ `${showDetailData.OpenTime}` }}
+              <span class="font-bold">營業時間：</span>{{ showDetailData.OpenTime }}
             </p>
             <p class="mb-[14px]"><span class="font-bold">餐廳電話：</span>{{ showDetailData.Phone }}</p>
             <p class="mb-[14px]"><span class="font-bold">餐廳地址：</span>{{ showDetailData.Address }}</p>

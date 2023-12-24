@@ -1,13 +1,13 @@
 <template>
-  <NewTitle :titleContent="'探索景點'"/>
+  <NewTitle :titleContent="'探索景點'" />
   <Layout>
-    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px]  px-[15px]">
+    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
       <Breadcrumb class="mb-8" v-if="breadcrumbItem.length > 0" :breadcrumb-li="breadcrumbItem" />
       <!-- 選縣市 -->
       <section class="mb-[60px] flex flex-col md:flex-row">
         <select
-          class="md:mr-[15px] md:w-60 cursor-pointer md:mb-0 mb-2 rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
+          class="mb-2 cursor-pointer rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
           v-model="citySelectModel"
         >
           <option
@@ -21,7 +21,7 @@
         </select>
         <!-- 選主題類別 -->
         <select
-          class="md:mr-[15px] md:w-60 rounded-md md:mb-0 mb-2 border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
+          class="mb-2 rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
           v-model="classSelectModel"
         >
           <option value="請選擇主題" selected>請選擇主題</option>
@@ -32,14 +32,14 @@
         <!-- 輸入框 -->
         <input
           type="text"
-          class="md:mr-[15px] flex-1 md:mb-0 mb-2 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
+          class="mb-2 flex-1 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b] md:mr-[15px] md:mb-0"
           placeholder="你想去哪裡？請輸入關鍵字"
           v-model="inputStr"
           @keyup.enter="submitDataFilter"
         />
         <button
           type="button"
-          class="flex h-[50px] md:w-[210px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4  active:ring-[#647a6060]"
+          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4 active:ring-[#647a6060] md:w-[210px]"
           @click="submitDataFilter"
         >
           <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>
@@ -55,7 +55,7 @@
           </div>
           <!-- 熱門主題 -->
           <h2 class="mb-3 text-4xl font-thin">熱門主題</h2>
-          <ul class="mb-3 grid md:grid-cols-4 grid-cols-2 gap-x-[15px]">
+          <ul class="mb-3 grid grid-cols-2 gap-x-[15px] md:grid-cols-4">
             <!-- 主題卡片 -->
             <SearchPageCard
               @emit-class-data="classDataFilter"
@@ -74,7 +74,7 @@
               共 <span class="text-orange-500">{{ dataLen }}</span> 筆
             </p>
           </h2>
-          <ul class="grid md:grid-cols-4 grid-cols-1 gap-x-[30px]">
+          <ul class="grid grid-cols-1 gap-x-[30px] md:grid-cols-4">
             <!-- PopCard -->
             <PopCard
               v-for="item in showPopCardData"

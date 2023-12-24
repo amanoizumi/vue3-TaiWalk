@@ -8,7 +8,7 @@
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
@@ -19,10 +19,7 @@ export default {
     const store = useStore();
     const pageLoading = computed(() => store.getters['loadingModules/pageLoading']);
 
-    const showIndexPage = ref(false);
-
     return {
-      showIndexPage,
       pageLoading,
     };
   },

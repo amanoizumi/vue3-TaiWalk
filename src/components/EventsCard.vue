@@ -1,13 +1,12 @@
 <template>
-  <RouterLink  class="hover:opacity-90" :to="`/detailPage/${id}`">
+  <RouterLink class="hover:opacity-90" :to="`/detailPage/${id}`">
     <div class="flex h-40 overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f9f9f9]">
       <div class="w-40">
-        <img class="h-40 object-cover" v-real-img="picture"  :src="picture" alt="活動圖片" />
+        <img class="h-40 object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
       </div>
-
       <div class="flex flex-1 flex-col px-[30px] py-4">
         <p class="mb-1 text-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
-        <h4 class="md:text-lg lg:text-xl font-bold text-[#2f2f2f] overflow-ellipsis">{{ title }}</h4>
+        <h4 class="overflow-ellipsis font-bold text-[#2f2f2f] md:text-lg lg:text-xl">{{ title }}</h4>
         <div class="mt-auto flex justify-between">
           <span class="flex items-center text-gray">
             <heroIconsOutlineLocation />{{ location === 'to see the official site' ? '詳見官網' : location }}
@@ -52,17 +51,15 @@ export default {
     if (props.title.length > 16) {
       title.value = props.title.slice(0, 12) + '...';
     } else {
-      title.value = props.title
-
+      title.value = props.title;
     }
-
 
     return {
       startTimeStr,
       endTimeStr,
       location,
       title,
-      noImg
+      noImg,
     };
   },
 };

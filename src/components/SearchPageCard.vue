@@ -16,8 +16,7 @@
 
 //
 <script>
-import { ref, onMounted } from 'vue';
-import noImg from '@/assets/img/no_image.png'
+import noImg from '@/assets/img/no_image.png';
 
 export default {
   props: {
@@ -26,8 +25,6 @@ export default {
   },
 
   setup(props, { emit }) {
-    const imageUrl = ref('');
-
     const searchClass = (className) => {
       emit('emit-class-data', className);
     };
