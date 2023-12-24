@@ -140,6 +140,7 @@
       </section>
     </div>
   </Layout>
+  <ScrollTop />
 </template>
 
 <script>

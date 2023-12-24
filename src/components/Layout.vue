@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <!-- navbar -->
-    <div class="bg-white z-20 fixed md:border-b md:border-[#e5e5e5] w-full shadow">
+    <div class="bg-white z-40 fixed md:border-b md:border-[#e5e5e5] w-full shadow">
       <nav class="mx-auto flex h-20 max-w-[1200px] px-[20px] lg:px-[45px]">
         <div class="flex w-full items-center justify-center md:flex-1 md:justify-between">
           <!--Logo -->
@@ -33,7 +33,6 @@
               </RouterLink>
             </li>
           </ul>
-
           <ul
             class="fixed inset-0 z-10 mt-[80px] bg-white flex flex-col text-gray md:hidden md:text-base pt-8"
             :class="menuState"
@@ -55,9 +54,8 @@
     <div class="relative pt-20">
       <slot></slot>
     </div>
-
     <!-- footer -->
-    <footer class="w-full bg-[#65895f] py-5 text-center text-white">
+    <footer class="w-full bg-[#65895f] text-sm md:text-base py-2 sm:py-5 text-center text-white">
       The F2E 3rd Week01 - UI Design: Breakfast, Front-end: Izumi
     </footer>
   </div>
