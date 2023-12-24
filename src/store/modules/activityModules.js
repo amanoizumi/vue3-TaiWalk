@@ -1,5 +1,5 @@
 import { getActivityApi } from '@/api/tdx';
-// import { afterDayActivity, getTodayDateStr } from '@/services/activity';
+import { afterDayActivity, getTodayDateStr, targetDayActivity } from '@/services/activity';
 
 const state = {
   activity: [],
@@ -8,6 +8,9 @@ const state = {
 const getters = {
   activityIndexPageData: (state, getters, rootState) => {
     return state.activity.slice(0, 4);
+  },
+  activityData: (state, getters, rootState) => {
+    return state.activity;
   },
 };
 

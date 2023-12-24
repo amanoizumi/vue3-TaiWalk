@@ -103,10 +103,10 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getRestaurantApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
 
 import img01 from '@/assets/img/restaurant_01.png';
@@ -121,7 +121,10 @@ export default {
     emitClassData: String,
   },
   setup() {
+    const store = useStore();
     const route = useRoute();
+    const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
+    const restaurantData = computed(() => store.getters['restaurantModules/restaurantsData']);
 
     const countyArr = cityData;
 
@@ -130,8 +133,6 @@ export default {
 
     const dateInput = ref('');
     const inputStr = ref('');
-
-    const restaurantData = ref([]);
 
     const dataLen = ref(0);
     const showPopCardData = ref([]);
@@ -180,15 +181,6 @@ export default {
         img: img06,
       },
     ]);
-
-    const callRestaurantApi = async () => {
-      try {
-        const res = await getRestaurantApi(0, false);
-        restaurantData.value = res.data;
-      } catch (err) {
-        console.dir(err);
-      }
-    };
 
     // 篩選資料
     const submitDataFilter = () => {
@@ -275,11 +267,11 @@ export default {
       showPopCardData.value = paginationArr.value[n - 1];
     });
 
-    onMounted(() => {
+    onMounted(async () => {
+      await callRestaurant();
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }
-      callRestaurantApi();
     });
 
     return {

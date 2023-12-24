@@ -85,7 +85,7 @@
               :address="item.Address"
             />
           </ul>
-          <div class="flex">
+          <div class="flex justify-center mt-10">
             <!-- Pagination -->
             <Pagination
               :page-now="pageNow"
@@ -103,10 +103,10 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getScenicSpotApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
 
 import img01 from '@/assets/img/spot_01.png';
@@ -122,15 +122,17 @@ export default {
     emitClassData: String,
   },
   setup(props, { emit }) {
+    const store = useStore();
+    const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
+    const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
     const route = useRoute();
     const countyArr = cityData;
+    
 
     // input Model
     const citySelectModel = ref('全部縣市');
     const classSelectModel = ref('請選擇主題');
     const inputStr = ref('');
-
-    const scenicSpotData = ref([]);
 
     const dataLen = ref(0);
     const showPopCardData = ref([]);
@@ -184,15 +186,6 @@ export default {
       },
     ]);
 
-    const callScenicSpotApi = async () => {
-      try {
-        const res = await getScenicSpotApi();
-        scenicSpotData.value = res.data;
-      } catch (err) {
-        console.dir(err);
-      }
-    };
-
     // 使用 select 篩選資料
 
     const submitDataFilter = () => {
@@ -203,7 +196,7 @@ export default {
       if (citySelectVal === '全部縣市') citySelectVal = '';
       if (classSelectVal === '請選擇主題') classSelectVal = '';
 
-      showPopCardData.value = scenicSpotData.value;
+      showPopCardData.value = hotSpotData.value;
 
       if (citySelectVal !== '') showPopCardData.value = cityDataFilter(citySelectVal, showPopCardData.value);
       if (classSelectVal !== '')
@@ -214,6 +207,8 @@ export default {
       createPagination(showPopCardData.value);
 
       inputStr.value = '';
+
+      changePage(1)
     };
 
     const createPagination = (arr) => {
@@ -227,7 +222,7 @@ export default {
     };
 
     // 字串篩選
-    const inputStringFilter = (inputStr, arr = scenicSpotData.value) => {
+    const inputStringFilter = (inputStr, arr = hotSpotData.value) => {
       const result = arr.filter((item) => {
         return item.ScenicSpotName?.includes(inputStr) || item.Description?.includes(inputStr);
       });
@@ -235,7 +230,7 @@ export default {
     };
 
     // 點選卡片篩選資料
-    const classDataFilter = (classStr, arr = scenicSpotData.value) => {
+    const classDataFilter = (classStr, arr = hotSpotData.value) => {
       const result = arr.filter((item) => {
         if (item.hasOwnProperty('Class1') && item.Class1 === classStr) {
           return item;
@@ -251,7 +246,7 @@ export default {
     };
 
     // 依縣市篩選資料
-    const cityDataFilter = (city, arr = scenicSpotData.value) => {
+    const cityDataFilter = (city, arr = hotSpotData.value) => {
       const result = arr.filter((item) => {
         return item.Address?.includes(city) || item.City?.includes(city);
       });
@@ -266,8 +261,9 @@ export default {
       pageNow.value = n;
       showPopCardData.value = paginationArr.value[n - 1];
     });
-    onMounted(() => {
-      callScenicSpotApi();
+
+    onMounted(async() => {
+      await callScenicSpot();
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }
@@ -288,7 +284,6 @@ export default {
       classDataFilter,
       submitDataFilter,
       changePage,
-
       img01,
       img02,
       img03,

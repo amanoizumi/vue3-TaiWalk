@@ -8,6 +8,9 @@ const getters = {
   restaurantsIndexPageData: (state, getters, rootState) => {
     return state.restaurants.slice(0, 4);
   },
+  restaurantsData: (state) => {
+    return state.restaurants
+  }
 };
 
 const actions = {

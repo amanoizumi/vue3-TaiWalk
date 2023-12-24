@@ -1,13 +1,13 @@
 <template>
-  <NewTitle :titleContent="'節慶活動'"/>
+  <NewTitle :titleContent="'節慶活動'" />
   <Layout>
-    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px]  px-[15px]">
+    <main class="mx-auto mt-[60px] mb-[120px] min-h-[80vh] max-w-[1110px] px-[15px]">
       <!-- 麵包屑 -->
       <Breadcrumb class="mb-8" v-if="breadcrumbItem.length > 0" :breadcrumb-li="breadcrumbItem" />
       <!-- 選縣市 -->
       <section class="mb-[60px] flex flex-col md:flex-row">
         <select
-          class="md:mr-[15px] md:w-60 cursor-pointer md:mb-0 mb-2 rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b]"
+          class="mb-2 cursor-pointer rounded-md border-[#e5e5e5] pl-[30px] text-[#6e7d60] focus:border-[#7f977b] focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
           v-model="citySelectModel"
         >
           <option
@@ -21,21 +21,21 @@
         </select>
         <!-- 選擇日期 -->
         <div
-          class="md:mr-[15px] flex md:w-60 md:mb-0 mb-2 items-center rounded-md border border-[#e5e5e5] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
+          class="mb-2 flex items-center rounded-md border border-[#e5e5e5] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b] md:mr-[15px] md:mb-0 md:w-60"
         >
           <DatepickerComponent @emit-time="setTime" class="md:w-60" />
         </div>
         <!-- 輸入框 -->
         <input
           type="text"
-          class="md:mr-[15px] flex-1 md:mb-0 mb-2 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
+          class="mb-2 flex-1 rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b] md:mr-[15px] md:mb-0"
           placeholder="想找有趣的？請輸入關鍵字"
           v-model="inputStr"
           @keyup.enter="submitDataFilter"
         />
         <button
           type="button"
-          class="flex h-[50px] md:w-[210px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4  active:ring-[#647a6060]"
+          class="flex h-[50px] items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4 active:ring-[#647a6060] md:w-[210px]"
           @click="submitDataFilter"
         >
           <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span class="">搜&emsp;&emsp;尋</span>
@@ -51,7 +51,7 @@
           </div>
           <!-- 熱門主題 -->
           <h2 class="mb-3 text-4xl font-thin">熱門主題</h2>
-          <ul class="mb-3 grid md:grid-cols-4 grid-cols-2 gap-x-[15px]">
+          <ul class="mb-3 grid grid-cols-2 gap-x-[15px] md:grid-cols-4">
             <!-- 主題卡片 -->
             <SearchPageCard
               @emit-class-data="classDataFilter"
@@ -70,7 +70,7 @@
               共 <span class="text-orange-500">{{ dataLen }}</span> 筆
             </p>
           </h2>
-          <ul class="grid  md:grid-cols-4 grid-cols-1 gap-x-[30px]">
+          <ul class="grid grid-cols-1 gap-x-[30px] md:grid-cols-4">
             <!-- PopCard -->
             <PopCard
               v-for="item in showPopCardData"
@@ -99,12 +99,14 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
+import { useStore } from 'vuex';
+
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getActivityApi } from '@/api/tdx';
-import { getTodayDateStr, targetDayActivity, afterDayActivity } from '@/services/activity';
+
 import cityData from '@/services/cityData';
+import { targetDayActivity } from '@/services/activity';
 
 import img01 from '@/assets/img/activity_01.png';
 import img02 from '@/assets/img/activity_02.png';
@@ -118,14 +120,18 @@ export default {
     emitClassData: String,
   },
   setup() {
+    const store = useStore();
+    const callScenicSpot = () => store.dispatch('activityModules/getActivity');
+
+    const activityData = computed(() => store.getters['activityModules/activityData']);
+
     const countyArr = cityData;
     const route = useRoute();
 
     const citySelectModel = ref('全部縣市');
+
     const dateInput = ref('');
     const inputStr = ref('');
-
-    const activityData = ref([]);
 
     const dataLen = ref(0);
     const showPopCardData = ref([]);
@@ -174,16 +180,6 @@ export default {
         img: img06,
       },
     ]);
-
-    const callActivityApi = async () => {
-      try {
-        const res = await getActivityApi(0, false);
-        const today = getTodayDateStr();
-        activityData.value = afterDayActivity(today, res.data);
-      } catch (err) {
-        console.dir(err);
-      }
-    };
 
     // 篩選資料
     const submitDataFilter = () => {
@@ -269,14 +265,15 @@ export default {
       showPopCardData.value = paginationArr.value[n - 1];
     });
 
-    onMounted(() => {
-      callActivityApi();
+    onMounted(async () => {
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }
+      callScenicSpot();
     });
 
     return {
+      activityData,
       citySelectModel,
       dateInput,
       inputStr,
@@ -295,7 +292,7 @@ export default {
       submitDataFilter,
       changePage,
       setTime,
-      
+
       img01,
       img02,
       img03,
@@ -306,4 +303,3 @@ export default {
   },
 };
 </script>
-@/api/tdx@/api/tdx
