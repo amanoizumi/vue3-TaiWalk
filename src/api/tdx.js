@@ -34,69 +34,121 @@ const getAuthorizationHeader = async () => {
 // 取得所有觀光景點資料
 export const getScenicSpotApi = async () => {
   try {
-    const token = await getAuthorizationHeader()
+    const token = await getAuthorizationHeader();
     const apiUrl = `${url}/ScenicSpot?$filter=Picture/PictureUrl1 ne null`;
-    
+
     return await axios.get(apiUrl, {
       headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     });
-
   } catch (error) {
-    console.error("Error in API request:", error);
+    console.error('Error in API getScenicSpotApi request:', error);
     return null;
-  }}
-
+  }
+};
 
 // 取得指定縣市的觀光景點資料('縣市英文名稱', 前 1 筆)
-export const getScenicSpotByCountyApi = (county, num) => {
-  const apiUrl = `${url}/ScenicSpot/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
+export const getScenicSpotByCountyApi = async (county, num) => {
+  try {
+    const token = await getAuthorizationHeader();
+    const apiUrl = `${url}/ScenicSpot/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
 
-  return axios.get(apiUrl, {
-    Authorization: getAuthorizationHeader(),
-  });
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getScenicSpotByCountyApi request:', error);
+    return null;
+  }
 };
-export const getActivityByCountyApi = (county, num) => {
-  const apiUrl = `${url}/Activity/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
+export const getActivityByCountyApi = async (county, num) => {
+  try {
+    const token = await getAuthorizationHeader();
+    const apiUrl = `${url}/Activity/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
+
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getActivityByCountyApi request:', error);
+    return null;
+  }
 };
 
-export const getRestaurantByCountyApi = (county, num) => {
-  const apiUrl = `${url}/Restaurant/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
+export const getRestaurantByCountyApi = async (county, num) => {
+  try {
+    const token = await getAuthorizationHeader();
+    const apiUrl = `${url}/Restaurant/${county}?$filter=Picture/PictureUrl1 ne null&$top=${num}`;
+
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getRestaurantByCountyApi request:', error);
+    return null;
+  }
 };
 
-export const getActivityApi = (top = 0, pictureFilter = true) => {
-  // 預設有圖片過濾
-  let apiUrl = `${url}/Activity?`;
+export const getActivityApi = async (top = 0, pictureFilter = true) => {
+  try {
+    const token = await getAuthorizationHeader();
+    let apiUrl = `${url}/Activity?`;
+    // 預設有圖片過濾
+    if (pictureFilter) apiUrl += '$filter=Picture/PictureUrl1 ne null';
+    if (top !== 0) apiUrl += `&$top=${top}`;
 
-  if (pictureFilter) apiUrl += '$filter=Picture/PictureUrl1 ne null';
-  if (top !== 0) apiUrl += `&$top=${top}`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getActivityApi request:', error);
+    return null;
+  }
 };
 
 // 取得所有餐飲資料
 // 預設有圖片過濾
-export const getRestaurantApi = (top = 0, pictureFilter = true) => {
-  let apiUrl = `${url}/Restaurant?`;
-  if (pictureFilter) apiUrl += '$filter=Picture/PictureUrl1 ne null';
-  if (top !== 0) apiUrl += `&$top=${top}`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
+export const getRestaurantApi = async (top = 0, pictureFilter = true) => {
+  try {
+    const token = await getAuthorizationHeader();
+
+    let apiUrl = `${url}/Restaurant?`;
+    if (pictureFilter) apiUrl += '$filter=Picture/PictureUrl1 ne null';
+    if (top !== 0) apiUrl += `&$top=${top}`;
+
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getRestaurantApi request:', error);
+    return null;
+  }
 };
 
 // 取得單一資料細節
-export const getDetailByIDApi = (id, categoryStr) => {
-  const apiUrl = `${url}/${categoryStr}?$filter=${categoryStr}ID eq '${id}'`;
-  return axios.get(apiUrl, {
-    authorization: getAuthorizationHeader(),
-  });
+export const getDetailByIDApi = async (id, categoryStr) => {
+  try {
+    const token = await getAuthorizationHeader();
+    const apiUrl = `${url}/${categoryStr}?$filter=${categoryStr}ID eq '${id}'`;
+
+    return await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error in API getDetailByIDApi request:', error);
+    return null;
+  }
 };
