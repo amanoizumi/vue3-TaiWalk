@@ -105,7 +105,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getScenicSpotApi } from '@/api/axios';
+import { getScenicSpotApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
 
 import img01 from '@/assets/img/spot_01.png';

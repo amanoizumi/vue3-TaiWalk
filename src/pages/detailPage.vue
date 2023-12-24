@@ -182,8 +182,8 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getDetailByIDApi } from '@/api/axios';
-import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/axios';
+import { getDetailByIDApi } from '@/api/tdx';
+import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
 import noImg from '@/assets/img/no_image.png';
 import icon from '@/assets/icon/pin.svg';

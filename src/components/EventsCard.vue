@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="`/detailPage/${id}`">
+  <RouterLink  class="hover:opacity-90" :to="`/detailPage/${id}`">
     <div class="flex h-40 overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f9f9f9]">
       <div class="w-40">
         <img class="h-40 object-cover" v-real-img="picture"  :src="picture" alt="活動圖片" />

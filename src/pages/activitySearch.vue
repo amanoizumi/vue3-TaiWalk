@@ -101,7 +101,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import chunk from 'lodash/chunk';
-import { getActivityApi } from '@/api/axios';
+import { getActivityApi } from '@/api/tdx';
 import { getTodayDateStr, targetDayActivity, afterDayActivity } from '@/services/activity';
 import cityData from '@/services/cityData';
 
