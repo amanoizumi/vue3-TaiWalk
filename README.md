@@ -21,8 +21,8 @@ npm run build
 
 - Vue 3
 - Vite 專案建置
-- Tailwind CSS
-- Vuex
+- Tailwind CSS 切版
+- Vuex 狀態管理
 - Vue 3 Datepicker
 - Axios
 
