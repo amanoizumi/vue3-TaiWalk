@@ -176,7 +176,6 @@ export default {
     const store = useStore();
 
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
-    const callRestaurantByCounty = () => store.dispatch('restaurantModules/getRestaurantByCounty');
     const callActivity = () => store.dispatch('activityModules/getActivity');
     const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
 

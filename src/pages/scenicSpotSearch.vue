@@ -232,6 +232,7 @@ export default {
     // 點選卡片篩選資料
     const classDataFilter = (classStr, arr = hotSpotData.value) => {
       const result = arr.filter((item) => {
+
         if (item.hasOwnProperty('Class1') && item.Class1 === classStr) {
           return item;
         } else if (item.hasOwnProperty('Class2') && item.Class2 === classStr) {
@@ -263,7 +264,10 @@ export default {
     });
 
     onMounted(async() => {
+      store.dispatch('loadingModules/updatePageLoading', true);
       await callScenicSpot();
+      store.dispatch('loadingModules/updatePageLoading', false);
+
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }

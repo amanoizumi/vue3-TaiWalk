@@ -268,7 +268,10 @@ export default {
     });
 
     onMounted(async () => {
+      store.dispatch('loadingModules/updatePageLoading', true);
       await callRestaurant();
+      store.dispatch('loadingModules/updatePageLoading', false);
+
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }
@@ -305,4 +308,3 @@ export default {
   },
 };
 </script>
-@/api/tdx@/api/tdx

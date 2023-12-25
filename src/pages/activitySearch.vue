@@ -266,10 +266,13 @@ export default {
     });
 
     onMounted(async () => {
+      store.dispatch('loadingModules/updatePageLoading', true);
+      await callScenicSpot();
+      store.dispatch('loadingModules/updatePageLoading', false);
+
       if (route.params.str !== undefined) {
         inputStr.value = route.params.str;
       }
-      callScenicSpot();
     });
 
     return {

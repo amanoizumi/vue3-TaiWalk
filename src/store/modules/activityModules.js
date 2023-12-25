@@ -11,15 +11,20 @@ const getters = {
       return item.hasOwnProperty('City');
     });
 
+    const todayStr = getTodayDateStr();
+
+    const afterDataCityData = afterDayActivity(todayStr, hasCityData);
+    
     const obj = {
       新北市: 0,
       高雄市: 0,
       花蓮縣: 0,
       桃園市: 0,
     };
+    
     const arr = [];
 
-    hasCityData.forEach((item) => {
+    afterDataCityData.forEach((item) => {
       if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
         obj[item.City] += 1;
         arr.push(item);
