@@ -1,10 +1,10 @@
 <template>
   <div class="text-sm text-[#646464]">
-    <ul class="flex flex-wrap">
-      <li class="mx-1 mb-2 h-8 w-8 overflow-hidden rounded border border-[#e5e5e5] bg-[#e5e5e5] text-white">
+    <div class="flex flex-wrap gap-2">
+      <div class="h-12 w-12 overflow-hidden rounded border border-[#e5e5e5] bg-[#e5e5e5] text-white">
         <button
           @click="changePage(pageNow - 1)"
-          class="flex h-full w-full items-center justify-center rounded"
+          class="flex h-full w-full items-center justify-center rounded text-lg"
           type="button"
           :class="{
             'cursor-not-allowed bg-[#e5e5e5] text-[#65895F]': pageNow === 1,
@@ -14,27 +14,18 @@
         >
           <heroicons-outline-chevron-left />
         </button>
-      </li>
-
-      <li
-        v-for="page in totalPage"
-        :key="page"
-        :class="{ 'border-[#65895F] text-[#65895F]': pageNow === page }"
-        class="mx-1 mb-2 h-8 w-8 rounded border border-[#e5e5e5]"
+      </div>
+      <select
+        class="rounded border-[#e5e5e5] shadow-sm focus:border-[#65895F] focus:ring focus:ring-[#65895F] focus:ring-opacity-50 w-20"
+        ref="selectDOM"
+        @change="selectChangePage()"
       >
-        <button
-          class="flex h-full w-full items-center justify-center rounded hover:bg-[#f9f9f9]"
-          type="button"
-          @click="changePage(page)"
-        >
-          {{ page }}
-        </button>
-      </li>
-
-      <li class="mx-1 mb-2 h-8 w-8 rounded border border-[#e5e5e5] bg-[#e5e5e5] text-white">
+        <option :value="page" v-for="page in totalPage">{{ page }}</option>
+      </select>
+      <div class="h-12 w-12 rounded border border-[#e5e5e5] bg-[#e5e5e5] text-white">
         <button
           @click="changePage(pageNow + 1)"
-          class="flex h-full w-full items-center justify-center rounded"
+          class="flex h-full w-full items-center justify-center rounded text-lg"
           type="button"
           :class="{
             'cursor-not-allowed bg-[#e5e5e5] text-[#65895F]': pageNow === totalPage,
@@ -44,12 +35,14 @@
         >
           <heroicons-outline-chevron-right />
         </button>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   props: {
     pageNow: {
@@ -60,11 +53,20 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const selectDOM = ref(null);
+
     const changePage = (num) => {
       emit('change-page', num);
+      selectDOM.value.value = num;
     };
+    const selectChangePage = () => {
+      emit('change-page', parseInt(selectDOM.value.value, 10));
+    };
+
     return {
+      selectDOM,
       changePage,
+      selectChangePage,
     };
   },
 };
