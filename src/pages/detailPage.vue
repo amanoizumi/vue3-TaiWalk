@@ -186,6 +186,8 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
 import { getDetailByIDApi } from '@/api/tdx';
 import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/tdx';
 import cityData from '@/services/cityData';
@@ -196,6 +198,7 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
 
     const breadcrumbItem = ref([
       {
@@ -367,7 +370,7 @@ export default {
         path: `/DetailPage/${id}`,
       });
     };
-    onMounted(() => {
+    onMounted(async() => {
       let id = route.params.id;
       let categoryID = id.slice(0, 2);
 
@@ -378,7 +381,17 @@ export default {
       } else if (categoryID === 'C3') {
         categoryStr.value = 'Restaurant';
       }
-      callDetailByIDApi(id, categoryStr.value);
+      
+      try {
+        store.dispatch('loadingModules/updatePageLoading', true);
+        await callDetailByIDApi(id, categoryStr.value);
+        store.dispatch('loadingModules/updatePageLoading', false);
+      } catch (error) {
+        store.dispatch('dialogModules/updateDialog', true);
+        console.error(error);
+      }
+
+
     });
 
     return {

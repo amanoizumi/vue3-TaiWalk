@@ -18,7 +18,7 @@ const getters = {
     };
     const arr = [];
 
-    state.restaurants.forEach((item) => {
+    hasCityData.forEach((item) => {
       if (obj.hasOwnProperty(item.City) && obj[item.City] < 1) {
         arr.push(item);
         obj[item.City] += 1;
@@ -28,8 +28,8 @@ const getters = {
     return arr;
   },
   restaurantsData: (state) => {
-    return state.restaurants
-  }
+    return state.restaurants;
+  },
 };
 
 const actions = {
@@ -39,7 +39,7 @@ const actions = {
       context.commit('RESTAURANT', data);
     } catch (err) {
       console.dir(err);
-    } 
+    }
   },
 };
 
