@@ -1,14 +1,14 @@
 <template>
   <RouterLink class="opacity-90 hover:opacity-100" :to="`/detailPage/${id}`">
-    <div class="flex max-h-40 overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f9f9f9] h-full">
+    <div class="flex h-40 overflow-hidden rounded-xl border border-[#e5e5e5] bg-[#f9f9f9]">
       <div class="w-40">
         <img class="h-full w-full object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
       </div>
-      <div class="flex flex-1 flex-col px-[30px] py-4">
-        <p class="mb-1 text-custom-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
+      <div class="flex flex-1 flex-col px-2 py-4 sm:px-[30px]">
+        <p class="sm:text-base mb-1 text-xs text-custom-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
         <h4 class="overflow-ellipsis font-bold text-[#2f2f2f] md:text-lg lg:text-xl">{{ title }}</h4>
-        <div class="mt-auto flex justify-between items-center">
-          <span class="flex items-center text-custom-gray">
+        <div class="mt-auto flex items-center justify-between">
+          <span class="hidden items-center text-custom-gray sm:flex">
             <heroIconsOutlineLocation />{{ location === 'to see the official site' ? '詳見官網' : location }}
           </span>
           <a href="#" class="text-[#7f977b] sm:hidden">

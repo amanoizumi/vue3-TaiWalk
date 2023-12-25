@@ -10,7 +10,7 @@
   </select>
   <input
     type="text"
-    class="rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
+    class="w-full rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
     placeholder="你想去哪裡？請輸入關鍵字"
     @keyup.enter="submit"
     v-model.trim="scenicStr"
@@ -24,7 +24,7 @@
   </button>
 </template>
 <script>
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 import heroiconsOutlineSearch from '~icons/heroicons-outline/search';

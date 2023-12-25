@@ -24,7 +24,7 @@
         </div>
 
         <div
-          class="grid-rowshttps://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C-3 grid h-[164px] gap-y-[7px] lg:mt-5"
+          class="grid-rows grid h-[164px] gap-y-[7px] lg:mt-5"
         >
           <SearchAttraction />
         </div>
@@ -54,7 +54,7 @@
               class="bg-gradient-to-r from-[#6E7D60] to-blue-500"
             >
               <div class="flex h-full items-center justify-center text-3xl text-white">
-                <RouterLink :to="`/detailPage/${item.ScenicSpotID}`"
+                <RouterLink class="p-10" :to="`/detailPage/${item.ScenicSpotID}`"
                   >{{ item.City }} | {{ item.ScenicSpotName }}
                 </RouterLink>
               </div>
