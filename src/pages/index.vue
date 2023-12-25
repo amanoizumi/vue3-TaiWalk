@@ -199,7 +199,6 @@ export default {
         callScenicSpot();
         callActivity();
         callRestaurant();
-        callRestaurantByCounty()
       } catch (err) {
         console.dir(err);
       }
