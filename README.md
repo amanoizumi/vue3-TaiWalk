@@ -1,6 +1,6 @@
 # THE F2E 台灣旅遊景點導覽-vue3-TaiWalk
 
-![image](https://hackmd.io/_uploads/rJuCGCUD6.png)
+![image](https://github.com/amanoizumi/vue3-TaiWalk/blob/feature/vuex/public/images/readmeImg.png?raw=true)
 
 **[DEMO](https://amanoizumi.github.io/vue3-TaiWalk/#/)**
 
