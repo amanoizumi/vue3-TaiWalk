@@ -28,13 +28,22 @@ export default {
     heroIconsOutlineLocation,
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: '',
+    },
     imageUrl: {
       type: String,
       default: noImg,
     },
-    address: String,
-    id: String,
+    address: {
+      type: String,
+      default: '',
+    },
+    id: {
+      type: String,
+      default: '',
+    },
   },
   setup(props, { emit }) {
     const emitData = () => {
