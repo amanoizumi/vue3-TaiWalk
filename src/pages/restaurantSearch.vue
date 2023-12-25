@@ -270,17 +270,16 @@ export default {
     onMounted(async () => {
       try {
         store.dispatch('loadingModules/updatePageLoading', true);
-      await callRestaurant();
-      store.dispatch('loadingModules/updatePageLoading', false);
+        await callRestaurant();
+        store.dispatch('loadingModules/updatePageLoading', false);
 
-      if (route.params.str !== undefined) {
-        inputStr.value = route.params.str;
-      }
+        if (route.params.str !== undefined) {
+          inputStr.value = route.params.str;
+        }
       } catch (error) {
         store.dispatch('dialogModules/updateDialog', true);
         console.error(error);
       }
-
     });
 
     return {

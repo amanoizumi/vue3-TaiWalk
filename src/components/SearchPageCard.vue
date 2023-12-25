@@ -14,7 +14,6 @@
   </li>
 </template>
 
-//
 <script>
 import noImg from '@/assets/img/no_image.png';
 

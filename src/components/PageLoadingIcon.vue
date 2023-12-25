@@ -1,5 +1,12 @@
 <template>
-  <svg class="animate__animated animate__pulse animate__infinite" width="300" height="160" viewBox="0 0 241 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    class="animate__animated animate__pulse animate__infinite"
+    width="300"
+    height="160"
+    viewBox="0 0 241 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M0 0L7 0.5L4.5 6.5L0 0Z" fill="#6E7D60" />
     <path d="M3.85077 12L8 1" stroke="#6E7D60" stroke-width="1.33" stroke-linecap="round" />
     <circle r="2.26037" transform="matrix(-1 0 0 1 12.1269 6.42537)" stroke="#6E7D60" stroke-width="1.33" />
@@ -58,14 +65,3 @@
     />
   </svg>
 </template>
-
-<script>
-import { ref, onMounted } from 'vue';
-
-export default {
-  setup(props, { emit }) {
-    onMounted(() => {});
-    return {};
-  },
-};
-</script>

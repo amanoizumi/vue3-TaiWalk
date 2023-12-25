@@ -1,5 +1,5 @@
 <script>
-import { ref, onMounted, watch, computed } from 'vue';
+import { onMounted } from 'vue';
 
 export default {
   props: {
@@ -34,11 +34,9 @@ export default {
       danger: 'bg-red-100 text-red-900 border-b-2 border-b-red-300',
     };
 
-    onMounted(() => {});
-
     return {
-      styleClassObj
-    }
+      styleClassObj,
+    };
   },
 };
 </script>

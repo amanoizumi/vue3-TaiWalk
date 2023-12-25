@@ -1,4 +1,4 @@
-import { getRestaurantApi, getRestaurantByCountyApi } from '@/api/tdx';
+import { getRestaurantApi } from '@/api/tdx';
 
 const state = {
   restaurants: [],

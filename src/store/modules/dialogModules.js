@@ -1,6 +1,6 @@
 const state = {
   show: false,
-  styleObj: {}
+  styleObj: {},
 };
 
 const getters = {
@@ -14,7 +14,7 @@ const actions = {
 };
 
 const mutations = {
-   SHOW_DIALOG(state, payload) {
+  SHOW_DIALOG(state, payload) {
     state.show = payload;
   },
 };

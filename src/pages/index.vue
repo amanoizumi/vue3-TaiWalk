@@ -23,9 +23,7 @@
           </div>
         </div>
 
-        <div
-          class="grid-rows grid h-[164px] gap-y-[7px] lg:mt-5"
-        >
+        <div class="grid-rows grid h-[164px] gap-y-[7px] lg:mt-5">
           <SearchAttraction />
         </div>
       </header>
@@ -128,7 +126,6 @@
         </div>
 
         <ul class="md:grid md:grid-cols-4 md:gap-x-[30px]">
-          <!-- <template v-if="restaurantData.length"> -->
           <PopCard
             v-for="item in restaurantData"
             :key="item.RestaurantID"
@@ -137,7 +134,6 @@
             :imageUrl="item.Picture.PictureUrl1"
             :address="item.Address"
           />
-          <!-- </template> -->
         </ul>
       </section>
     </div>
@@ -146,7 +142,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from 'vue';
+import { onMounted, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
@@ -179,12 +175,10 @@ export default {
     const callActivity = () => store.dispatch('activityModules/getActivity');
     const callRestaurant = () => store.dispatch('restaurantModules/getRestaurant');
 
-
     const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
     const swiperData = computed(() => store.getters['scenicSpotModules/scenicForSwiper']);
     const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
     const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
-
 
     watchEffect(() => {
       if (hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
@@ -198,7 +192,6 @@ export default {
         callScenicSpot();
         callActivity();
         callRestaurant();
-
       } catch (error) {
         store.dispatch('dialogModules/updateDialog', true);
         console.error(error);

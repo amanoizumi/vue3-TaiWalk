@@ -5,7 +5,7 @@
         <img class="h-full w-full object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
       </div>
       <div class="flex flex-1 flex-col px-2 py-4 sm:px-[30px]">
-        <p class="sm:text-base mb-1 text-xs text-custom-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
+        <p class="mb-1 text-xs text-custom-gray sm:text-base">{{ startTimeStr }} - {{ endTimeStr }}</p>
         <h4 class="overflow-ellipsis font-bold text-[#2f2f2f] md:text-lg lg:text-xl">{{ title }}</h4>
         <div class="mt-auto flex items-center justify-between">
           <span class="hidden items-center text-custom-gray sm:flex">

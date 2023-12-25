@@ -121,7 +121,7 @@ export default {
   emits: {
     emitClassData: String,
   },
-  setup(props, { emit }) {
+  setup() {
     const store = useStore();
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
     const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
@@ -186,7 +186,6 @@ export default {
     ]);
 
     // 使用 select 篩選資料
-
     const submitDataFilter = () => {
       showPopCardData.value = [];
       let citySelectVal = citySelectModel.value;

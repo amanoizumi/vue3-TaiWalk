@@ -1,4 +1,3 @@
-
 export default [
   {
     cityTW: '全部縣市',

@@ -35,7 +35,7 @@
             </li>
           </ul>
           <ul
-            class="fixed inset-0 z-10 mt-[80px] flex flex-col bg-white pt-8 text-gray md:hidden md:text-base"
+            class="text-gray fixed inset-0 z-10 mt-[80px] flex flex-col bg-white pt-8 md:hidden md:text-base"
             :class="menuState"
           >
             <li v-for="item in menuItems" :key="item.text" class="py-2 md:py-0">
@@ -80,6 +80,7 @@ export default {
 
     const active = ref(route.path);
     const menuState = ref('hidden');
+
     const toggleMenu = () => {
       if (menuState.value === 'hidden') {
         menuState.value = '';

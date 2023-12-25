@@ -10,11 +10,11 @@
         :last-item="breadcrumbLastStr"
       />
       <section class="mb-[30px]">
-        <div class="h-[250px] overflow-hidden rounded-3xl bg-[#CCD5CA] md:h-[400px] flex justify-center">
+        <div class="flex h-[250px] justify-center overflow-hidden rounded-3xl bg-[#CCD5CA] md:h-[400px]">
           <img
             class="w-30 object-cover"
             :class="{
-              'w-full': showDetailData.Picture?.split('/').pop() !== 'no_image.png'
+              'w-full': showDetailData.Picture?.split('/').pop() !== 'no_image.png',
             }"
             v-real-img="showDetailData.Picture"
             :src="showDetailData.Picture"
@@ -78,9 +78,7 @@
           </div>
 
           <div v-else-if="categoryStr === 'Restaurant'">
-            <p class="mb-[14px]">
-              <span class="font-bold">營業時間：</span>{{ showDetailData.OpenTime }}
-            </p>
+            <p class="mb-[14px]"><span class="font-bold">營業時間：</span>{{ showDetailData.OpenTime }}</p>
             <p class="mb-[14px]"><span class="font-bold">餐廳電話：</span>{{ showDetailData.Phone }}</p>
             <p class="mb-[14px]"><span class="font-bold">餐廳地址：</span>{{ showDetailData.Address }}</p>
             <p class="mb-[14px]">
@@ -370,7 +368,7 @@ export default {
         path: `/DetailPage/${id}`,
       });
     };
-    onMounted(async() => {
+    onMounted(async () => {
       let id = route.params.id;
       let categoryID = id.slice(0, 2);
 
@@ -381,7 +379,7 @@ export default {
       } else if (categoryID === 'C3') {
         categoryStr.value = 'Restaurant';
       }
-      
+
       try {
         store.dispatch('loadingModules/updatePageLoading', true);
         await callDetailByIDApi(id, categoryStr.value);
@@ -390,8 +388,6 @@ export default {
         store.dispatch('dialogModules/updateDialog', true);
         console.error(error);
       }
-
-
     });
 
     return {

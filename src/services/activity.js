@@ -18,7 +18,6 @@ export const targetDayActivity = (dateStr, arr) => {
     return targetTime >= activityStartTime && targetTime <= activityEndTime;
   });
 
-  
   return result;
 };
 

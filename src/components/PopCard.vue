@@ -18,7 +18,6 @@
   </RouterLink>
 </template>
 
-//
 <script>
 import heroIconsOutlineLocation from '~icons/heroicons-outline/location-marker';
 import noImg from '@/assets/img/no_image.png';
@@ -47,7 +46,6 @@ export default {
   },
   setup(props, { emit }) {
     const emitData = () => {
-      // 重新觸發
       emit('emit-update-detail-page', props.id);
     };
     return {

@@ -4,10 +4,10 @@ const state = {
 };
 
 const getters = {
-  indexLoading: state => state.indexLoading,
+  indexLoading: (state) => state.indexLoading,
   pageLoading: (state) => {
-    return state.pageLoading
-  }
+    return state.pageLoading;
+  },
 };
 
 const actions = {

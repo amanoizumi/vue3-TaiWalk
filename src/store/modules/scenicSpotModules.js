@@ -34,11 +34,11 @@ const getters = {
 const actions = {
   async getScenicSpot(context) {
     try {
-      const data = await getScenicSpotApi(0, false);
-      context.commit('SCENIC_SPOT', data.data);
+      const { data } = await getScenicSpotApi(0, false);
+      context.commit('SCENIC_SPOT', data);
     } catch (err) {
       console.dir(err);
-    } 
+    }
   },
 };
 
