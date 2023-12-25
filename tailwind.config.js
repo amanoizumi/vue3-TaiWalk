@@ -8,12 +8,6 @@ module.exports = {
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   theme: {
-    container: {
-      padding: {
-        DEFAULT: '0.75rem',
-        center: true
-      },
-    },
     extend: {
       zIndex: {
         '60': '60',
