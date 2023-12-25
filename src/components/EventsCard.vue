@@ -5,10 +5,10 @@
         <img class="h-full w-full object-cover" v-real-img="picture" :src="picture" alt="活動圖片" />
       </div>
       <div class="flex flex-1 flex-col px-[30px] py-4">
-        <p class="mb-1 text-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
+        <p class="mb-1 text-custom-gray">{{ startTimeStr }} - {{ endTimeStr }}</p>
         <h4 class="overflow-ellipsis font-bold text-[#2f2f2f] md:text-lg lg:text-xl">{{ title }}</h4>
         <div class="mt-auto flex justify-between items-center">
-          <span class="flex items-center text-gray">
+          <span class="flex items-center text-custom-gray">
             <heroIconsOutlineLocation />{{ location === 'to see the official site' ? '詳見官網' : location }}
           </span>
           <a href="#" class="text-[#7f977b] sm:hidden">

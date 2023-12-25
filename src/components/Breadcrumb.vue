@@ -4,7 +4,7 @@
       <RouterLink
         :to="item.path"
         class="px-2"
-        :class="idx < 2 ? 'text-[#6E7D60] hover:text-green-800 ' : 'text-gray'"
+        :class="idx < 2 ? 'text-[#6E7D60] hover:text-green-800 ' : 'text-custom-gray'"
       >
         {{ item.text }}
       </RouterLink>

@@ -2,6 +2,7 @@
   <Loading class="z-30 bg-[#ffffff] bg-opacity-90" :lock-scroll="true" :active.sync="pageLoading">
     <PageLoadingIcon></PageLoadingIcon>
   </Loading>
+  <DialogComponent :show-dialog="showDialog"></DialogComponent>
   <RouterView />
 </template>
 <script>
@@ -18,9 +19,11 @@ export default {
   setup(props) {
     const store = useStore();
     const pageLoading = computed(() => store.getters['loadingModules/pageLoading']);
+    const showDialog = computed(() => store.getters['dialogModules/showDialog']);
 
     return {
       pageLoading,
+      showDialog
     };
   },
 };

@@ -23,7 +23,7 @@
             </div>
           </button>
           <!--menu -->
-          <ul class="hidden justify-center text-gray md:flex md:text-base">
+          <ul class="hidden justify-center text-custom-gray md:flex md:text-base">
             <li v-for="item in menuItems" :key="item.text" class="py-2 md:py-0">
               <RouterLink
                 :to="item.to"

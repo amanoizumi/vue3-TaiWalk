@@ -185,6 +185,7 @@ export default {
     const activityData = computed(() => store.getters['activityModules/activityIndexPageData']);
     const restaurantData = computed(() => store.getters['restaurantModules/restaurantsIndexPageData']);
 
+
     watchEffect(() => {
       if (hotSpotData.value?.length && activityData.value?.length && restaurantData.value?.length) {
         store.dispatch('loadingModules/updatePageLoading', false);
@@ -194,12 +195,13 @@ export default {
     onMounted(() => {
       try {
         store.dispatch('loadingModules/updatePageLoading', true);
-
         callScenicSpot();
         callActivity();
         callRestaurant();
-      } catch (err) {
-        console.dir(err);
+
+      } catch (error) {
+        store.dispatch('dialogModules/updateDialog', true);
+        console.error(error);
       }
     });
 

@@ -85,7 +85,7 @@
               :address="item.Address"
             />
           </ul>
-          <div class="flex justify-center mt-10">
+          <div class="mt-10 flex justify-center">
             <!-- Pagination -->
             <Pagination
               :page-now="pageNow"
@@ -127,7 +127,6 @@ export default {
     const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
     const route = useRoute();
     const countyArr = cityData;
-    
 
     // input Model
     const citySelectModel = ref('全部縣市');
@@ -205,10 +204,7 @@ export default {
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
 
       createPagination(showPopCardData.value);
-
       inputStr.value = '';
-
-      changePage(1)
     };
 
     const createPagination = (arr) => {
@@ -232,7 +228,6 @@ export default {
     // 點選卡片篩選資料
     const classDataFilter = (classStr, arr = hotSpotData.value) => {
       const result = arr.filter((item) => {
-
         if (item.hasOwnProperty('Class1') && item.Class1 === classStr) {
           return item;
         } else if (item.hasOwnProperty('Class2') && item.Class2 === classStr) {
@@ -263,13 +258,18 @@ export default {
       showPopCardData.value = paginationArr.value[n - 1];
     });
 
-    onMounted(async() => {
-      store.dispatch('loadingModules/updatePageLoading', true);
-      await callScenicSpot();
-      store.dispatch('loadingModules/updatePageLoading', false);
+    onMounted(async () => {
+      try {
+        store.dispatch('loadingModules/updatePageLoading', true);
+        await callScenicSpot();
+        store.dispatch('loadingModules/updatePageLoading', false);
 
-      if (route.params.str !== undefined) {
-        inputStr.value = route.params.str;
+        if (route.params.str !== undefined) {
+          inputStr.value = route.params.str;
+        }
+      } catch (error) {
+        store.dispatch('dialogModules/updateDialog', true);
+        console.error(error);
       }
     });
 

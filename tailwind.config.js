@@ -19,7 +19,7 @@ module.exports = {
       },
       colors: {
         // 'gray': colors.zinc,
-        'gray': '#646464',
+        'custom-gray': '#646464',
       },
       fontFamily: {
         sans: ['Noto Sans TC',...fontFamily.sans],

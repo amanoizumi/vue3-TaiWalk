@@ -10,7 +10,7 @@
         </div>
       </div>
       <h4 class="mb-[10px] text-md font-bold text-[#2f2f2f] md:text-xl">{{ title }}</h4>
-      <div class="flex text-gray">
+      <div class="flex text-custom-gray">
         <heroIconsOutlineLocation class="mt-1" />
         {{ address || '暫無地址資料' }}
       </div>

@@ -266,12 +266,17 @@ export default {
     });
 
     onMounted(async () => {
-      store.dispatch('loadingModules/updatePageLoading', true);
-      await callScenicSpot();
-      store.dispatch('loadingModules/updatePageLoading', false);
+      try {
+        store.dispatch('loadingModules/updatePageLoading', true);
+        await callScenicSpot();
+        store.dispatch('loadingModules/updatePageLoading', false);
 
-      if (route.params.str !== undefined) {
-        inputStr.value = route.params.str;
+        if (route.params.str !== undefined) {
+          inputStr.value = route.params.str;
+        }
+      } catch (error) {
+        store.dispatch('dialogModules/updateDialog', true);
+        console.error(error);
       }
     });
 
