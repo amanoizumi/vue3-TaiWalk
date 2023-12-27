@@ -183,8 +183,8 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
 
 import { getDetailByIDApi } from '@/api/tdx';
 import { getScenicSpotByCountyApi, getActivityByCountyApi, getRestaurantByCountyApi } from '@/api/tdx';
@@ -222,6 +222,36 @@ export default {
     const coordinate = ref(location);
     const center = ref(location);
 
+    const createPopData = async (city) => {
+      const cityObj = cityData.filter((item) => item.cityTW === city);
+
+      const arr = [];
+
+      city = cityObj[0].cityEN;
+      let resultData = [];
+
+      if (categoryStr.value === 'ScenicSpot') {
+        const { data } = await getScenicSpotByCountyApi(city, 4);
+        resultData = data;
+      } else if (categoryStr.value === 'Activity') {
+        const { data } = await getActivityByCountyApi(city, 4);
+        resultData = data;
+      } else if (categoryStr.value === 'Restaurant') {
+        const { data } = await getRestaurantByCountyApi(city, 4);
+        resultData = data;
+      }
+      resultData.forEach((item) => {
+        const obj = {
+          id: item[categoryStr.value + 'ID'],
+          title: item[categoryStr.value + 'Name'],
+          imageUrl: item.Picture?.PictureUrl1 || noImg,
+          address: item.Address,
+        };
+        arr.push(obj);
+      });
+      popCardData.value = arr;
+    };
+
     const callDetailByIDApi = async (id) => {
       breadcrumbItem.value = [
         {
@@ -231,59 +261,11 @@ export default {
       ];
       try {
         const res = await getDetailByIDApi(id, categoryStr.value);
-
         detailData.value = res.data[0];
 
         let city = detailData.value.City;
 
-        const cityObj = cityData.filter((item) => item.cityTW === city);
-        const arr = [];
-        if (city !== undefined) {
-          city = cityObj[0].cityEN;
-
-          if (categoryStr.value === 'ScenicSpot') {
-            const result = await getScenicSpotByCountyApi(city, 4);
-            const data = result.data;
-
-            data.forEach((item) => {
-              const obj = {
-                id: item.ScenicSpotID,
-                title: item.ScenicSpotName,
-                imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address,
-              };
-              arr.push(obj);
-            });
-          } else if (categoryStr.value === 'Activity') {
-            const result = await getActivityByCountyApi(city, 4);
-            const data = result.data;
-
-            data.forEach((item) => {
-              const obj = {
-                id: item.ActivityID,
-                title: item.ActivityName,
-                imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address,
-              };
-              arr.push(obj);
-            });
-          } else if (categoryStr.value === 'Restaurant') {
-            const result = await getRestaurantByCountyApi(city, 4);
-            const data = result.data;
-
-            data.forEach((item) => {
-              const obj = {
-                id: item.RestaurantID,
-                title: item.RestaurantName,
-                imageUrl: item.Picture?.PictureUrl1 || noImg,
-                address: item.Address,
-              };
-              arr.push(obj);
-            });
-          }
-        }
-
-        popCardData.value = arr;
+        createPopData(city);
 
         breadcrumbLastStr.value = detailData.value[categoryStr.value + 'Name'];
         location = [

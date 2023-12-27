@@ -18,7 +18,7 @@
       <select
         class="rounded border-[#e5e5e5] shadow-sm focus:border-[#65895F] focus:ring focus:ring-[#65895F] focus:ring-opacity-50 w-20"
         ref="selectDOM"
-        @change="selectChangePage()"
+        @change="selectChangePage"
       >
         <option :value="page" v-for="page in totalPage">{{ page }}</option>
       </select>

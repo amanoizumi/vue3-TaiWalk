@@ -88,7 +88,6 @@
           <div class="mt-10 flex justify-center">
             <!-- Pagination -->
             <Pagination
-              ref="selectDOM"
               :page-now="pageNow"
               :total-page="totalPage"
               @change-page="changePage"
@@ -123,8 +122,6 @@ export default {
     emitClassData: String,
   },
   setup() {
-    const selectDOM = ref(null);
-
     const store = useStore();
     const callScenicSpot = () => store.dispatch('scenicSpotModules/getScenicSpot');
     const hotSpotData = computed(() => store.getters['scenicSpotModules/scenicSpot']);
