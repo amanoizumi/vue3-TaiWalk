@@ -150,13 +150,12 @@
           </div>
         </div>
       </section>
-
       <section v-if="popCardData?.length !== 0">
         <h2 v-if="categoryStr === 'ScenicSpot'" class="mb-4 text-2xl font-thin text-[#1E1E1E] md:text-4xl">
           還有這些不能錯過的景點
         </h2>
         <h2 v-else-if="categoryStr === 'Activity'" class="mb-4 text-2xl font-thin text-[#1E1E1E] md:text-4xl">
-          還有這些不能錯過活動
+          還有這些不能錯過的活動
         </h2>
         <h2
           v-else-if="categoryStr === 'Restaurant'"
@@ -223,33 +222,36 @@ export default {
     const center = ref(location);
 
     const createPopData = async (city) => {
-      const cityObj = cityData.filter((item) => item.cityTW === city);
+      if (city !== undefined) {
+        const cityArr = cityData.filter((item) => {
+          return item.cityTW === city;
+        });
+        const arr = [];
 
-      const arr = [];
+        city = cityArr[0].cityEN;
+        let resultData = [];
 
-      city = cityObj[0].cityEN;
-      let resultData = [];
-
-      if (categoryStr.value === 'ScenicSpot') {
-        const { data } = await getScenicSpotByCountyApi(city, 4);
-        resultData = data;
-      } else if (categoryStr.value === 'Activity') {
-        const { data } = await getActivityByCountyApi(city, 4);
-        resultData = data;
-      } else if (categoryStr.value === 'Restaurant') {
-        const { data } = await getRestaurantByCountyApi(city, 4);
-        resultData = data;
+        if (categoryStr.value === 'ScenicSpot') {
+          const { data } = await getScenicSpotByCountyApi(city, 4);
+          resultData = data;
+        } else if (categoryStr.value === 'Activity') {
+          const { data } = await getActivityByCountyApi(city, 4);
+          resultData = data;
+        } else if (categoryStr.value === 'Restaurant') {
+          const { data } = await getRestaurantByCountyApi(city, 4);
+          resultData = data;
+        }
+        resultData.forEach((item) => {
+          const obj = {
+            id: item[categoryStr.value + 'ID'],
+            title: item[categoryStr.value + 'Name'],
+            imageUrl: item.Picture?.PictureUrl1 || noImg,
+            address: item.Address,
+          };
+          arr.push(obj);
+        });
+        popCardData.value = arr;
       }
-      resultData.forEach((item) => {
-        const obj = {
-          id: item[categoryStr.value + 'ID'],
-          title: item[categoryStr.value + 'Name'],
-          imageUrl: item.Picture?.PictureUrl1 || noImg,
-          address: item.Address,
-        };
-        arr.push(obj);
-      });
-      popCardData.value = arr;
     };
 
     const callDetailByIDApi = async (id) => {
@@ -259,19 +261,21 @@ export default {
           text: '首頁',
         },
       ];
+
       try {
         const res = await getDetailByIDApi(id, categoryStr.value);
         detailData.value = res.data[0];
 
         let city = detailData.value.City;
-
         createPopData(city);
 
         breadcrumbLastStr.value = detailData.value[categoryStr.value + 'Name'];
+
         location = [
           Number(detailData.value.Position.PositionLon.toFixed(7)),
           Number(detailData.value.Position.PositionLat.toFixed(6)),
         ];
+
         coordinate.value = location;
         center.value = location;
 
@@ -283,6 +287,7 @@ export default {
           WebsiteUrl: detailData.value.WebsiteUrl || '尚無提供網站',
           Class: createClassArr(),
         };
+
         // 整理資訊
         if (categoryStr.value === 'Activity') {
           obj.StartTime = detailData.value.StartTime?.slice(0, 10) || '尚無活動開始時間資訊';
@@ -303,29 +308,15 @@ export default {
         showDetailData.value = obj;
         createBreadcrumbObj(id);
       } catch (err) {
-        console.dir(err);
-        console.dir('無此頁面，即將跳轉回首頁');
         router.push('/');
       }
     };
 
     const createClassArr = () => {
-      let arr = [];
-      if (detailData.value.hasOwnProperty('Class')) {
-        arr.push(detailData.value.Class);
-      }
-      if (detailData.value.hasOwnProperty('Class1')) {
-        arr.push(detailData.value.Class1);
-      }
-      if (detailData.value.hasOwnProperty('Class2')) {
-        arr.push(detailData.value.Class2);
-      }
-      if (detailData.value.hasOwnProperty('Class3')) {
-        arr.push(detailData.value.Class3);
-      }
-      // 過濾掉重複標籤
-      arr = [...new Set(arr)];
-      return arr;
+      // 整理出類別
+      return Object.keys(detailData.value)
+        .filter((item) => item.match('Class'))
+        .map((item) => detailData.value[item]);
     };
 
     const createBreadcrumbObj = (id) => {
