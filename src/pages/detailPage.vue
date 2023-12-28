@@ -66,7 +66,7 @@
               <span class="font-bold">官方網站：</span
               ><a
                 target="_blank"
-                class="hover:text-orange-600"
+                class="text-[#6E7D60] hover:text-orange-600"
                 v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
                 :href="showDetailData.WebsiteUrl"
               >
@@ -86,7 +86,7 @@
               <span class="font-bold">官方網站：</span>
               <a
                 target="_blank"
-                class="hover:text-orange-600"
+                class="text-[#6E7D60] hover:text-orange-600"
                 v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
                 :href="showDetailData.WebsiteUrl"
                 >{{ showDetailData.WebsiteUrl }}</a
@@ -104,7 +104,7 @@
               <span class="font-bold">官方網站：</span>
               <a
                 target="_blank"
-                class="hover:text-orange-600"
+                class="text-[#6E7D60] hover:text-orange-600"
                 v-if="showDetailData.WebsiteUrl !== '尚無提供網站'"
                 :href="showDetailData.WebsiteUrl"
                 >{{ showDetailData.WebsiteUrl }}</a
