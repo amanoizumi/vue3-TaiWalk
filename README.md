@@ -1,4 +1,4 @@
-# THE F2E 台灣旅遊景點導覽-vue3-TaiWalk
+# THE F2E 3rd - 台灣旅遊景點導覽 TaiWalk
 
 ![image](https://github.com/amanoizumi/vue3-TaiWalk/blob/feature/vuex/public/images/readmeImg.png?raw=true)
 
@@ -49,3 +49,7 @@ npm run build
 - styles # 樣式管理
 - .env # 環境變數
 - main.js # 核心原始碼
+
+
+**[黑客松活動網址 - THE F2E 3rd](https://amanoizumi.github.io/vue3-TaiWalk/#/)**
+**[設計稿線上標示文件 - 設計師：早餐](https://www.figma.com/file/5HQAZ2bunGNKma2fwU0aNZ/The-F2E-3rd---Week1-%E5%8F%B0%E7%81%A3%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E%E5%B0%8E%E8%A6%BD?node-id=0%3A1)**
