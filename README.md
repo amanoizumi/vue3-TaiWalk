@@ -50,6 +50,7 @@ npm run build
 - .env # 環境變數
 - main.js # 核心原始碼
 
+## 補充資訊
 
 **[黑客松活動網址 - THE F2E 3rd](https://amanoizumi.github.io/vue3-TaiWalk/#/)**
 
