@@ -271,6 +271,7 @@ export default {
         await callScenicSpot();
         store.dispatch('loadingModules/updatePageLoading', false);
 
+        
         if (route.params.str !== undefined) {
           inputStr.value = route.params.str;
         }

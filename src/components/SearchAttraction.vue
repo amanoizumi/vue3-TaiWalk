@@ -12,12 +12,12 @@
     type="text"
     class="w-full rounded-md border-[#e5e5e5] bg-[#f9f9f9] pl-[30px] focus:border-[#7f977b] focus:bg-white focus:ring-[#7f977b]"
     placeholder="你想去哪裡？請輸入關鍵字"
-    @keyup.enter="submit"
+    @keyup.enter="submitSearch"
     v-model.trim="scenicStr"
   />
   <button
     type="button"
-    @click="submit"
+    @click="submitSearch"
     class="flex items-center justify-center rounded-md bg-[#7f977b] text-white hover:bg-[#647a60] active:ring-4 active:ring-[#647a6060]"
   >
     <heroiconsOutlineSearch class="mr-5 mt-[3px]" /><span>搜&emsp;&emsp;尋</span>
@@ -45,7 +45,7 @@ export default {
       defaultSelect.value = e.target.value;
     };
 
-    const submit = () => {
+    const submitSearch = () => {
       const val = defaultSelect.value;
 
       const linkOption = {
@@ -53,6 +53,7 @@ export default {
         節慶活動: 'activitySearch',
         品嚐美食: 'restaurantSearch',
       };
+
       router.push({
         name: linkOption[val],
         params: {
@@ -66,7 +67,7 @@ export default {
       selectArr,
       scenicStr,
       changeFn,
-      submit,
+      submitSearch,
     };
   },
 };
