@@ -204,7 +204,7 @@ export default {
       if (inputStr.value !== '') {
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
       }
-
+      pageNow.value = 1;
       createPagination(showPopCardData.value);
       inputStr.value = '';
     };

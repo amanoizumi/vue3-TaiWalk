@@ -201,7 +201,8 @@ export default {
         showPopCardData.value = classDataFilter(classSelectVal, showPopCardData.value);
       if (inputStr.value !== '')
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
-
+      
+      pageNow.value = 1;
       createPagination(showPopCardData.value);
       inputStr.value = '';
     };

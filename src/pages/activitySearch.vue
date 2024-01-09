@@ -183,7 +183,9 @@ export default {
 
     // 篩選資料
     const submitDataFilter = () => {
+
       showPopCardData.value = [];
+
       let citySelectVal = citySelectModel.value;
 
       if (citySelectVal === '全部縣市') {
@@ -200,6 +202,9 @@ export default {
       if (inputStr.value !== '') {
         showPopCardData.value = inputStringFilter(inputStr.value, showPopCardData.value);
       }
+
+      pageNow.value = 1;
+
       createPagination(showPopCardData.value);
 
       inputStr.value = '';
